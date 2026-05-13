@@ -1,7 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
 
-// ===== Content =====
+// ============================================================
+// CONTENT — single source of truth
+// ============================================================
 
 const skills = [
   "Python", "SQL", "Solidity", "JavaScript", "R",
@@ -13,19 +15,95 @@ const skills = [
   "GENIUS Act", "MiCA", "Basel III", "FERPA/HIPAA",
 ];
 
+const skillGroups = [
+  {
+    title: "Programming",
+    icon: "code",
+    accent: "accent",
+    items: [
+      { name: "Python", note: "Pandas · NumPy · scikit-learn · hmmlearn" },
+      { name: "SQL", note: "MySQL · SQLite" },
+      { name: "Solidity", note: "Smart contracts" },
+      { name: "JavaScript", note: "Vue · Express · Node" },
+      { name: "R", note: "Statistical analysis" },
+    ],
+  },
+  {
+    title: "Machine Learning & AI",
+    icon: "brain",
+    accent: "cobalt",
+    items: [
+      { name: "Hidden Markov Models", note: "Sequence modeling" },
+      { name: "Random Forest · XGBoost", note: "Ensemble learning" },
+      { name: "K-Means · Logistic Regression", note: "Clustering & baselines" },
+      { name: "Google Vertex AI", note: "AutoML classification" },
+      { name: "SHAP · UMAP", note: "Explainability & reduction" },
+    ],
+  },
+  {
+    title: "Data & Visualization",
+    icon: "chart",
+    accent: "moss",
+    items: [
+      { name: "Tableau", note: "Dashboards · KPIs" },
+      { name: "Power BI", note: "DAX · modeling" },
+      { name: "D3.js", note: "Interactive web viz" },
+      { name: "Excel", note: "Pivot · VBA" },
+      { name: "NVivo 12 Plus", note: "Qualitative coding" },
+    ],
+  },
+  {
+    title: "Blockchain",
+    icon: "blocks",
+    accent: "accent-warm",
+    items: [
+      { name: "Truffle · OpenZeppelin", note: "Smart-contract toolchain" },
+      { name: "Web3.js · Chainlink", note: "dApp integration & oracles" },
+      { name: "Ethereum Sepolia", note: "Testnet deploys" },
+      { name: "Hyperledger Fabric", note: "Permissioned blockchain" },
+      { name: "Mocha / Chai", note: "Contract testing" },
+    ],
+  },
+  {
+    title: "Cloud & DevOps",
+    icon: "cloud",
+    accent: "cobalt",
+    items: [
+      { name: "AWS S3", note: "Object storage" },
+      { name: "Google Cloud", note: "Vertex AI · AutoML" },
+      { name: "Microsoft Azure", note: "Cloud services" },
+      { name: "Docker", note: "Containerization" },
+      { name: "Git / GitHub", note: "Version control · CI/CD" },
+    ],
+  },
+  {
+    title: "FinTech Domain",
+    icon: "vault",
+    accent: "accent",
+    items: [
+      { name: "Credit Risk · Fraud Detection", note: "ML applied to finance" },
+      { name: "GENIUS Act · MiCA · Basel III", note: "Stablecoin regulation" },
+      { name: "CCPA · COPPA · FERPA · HIPAA", note: "Compliance frameworks" },
+      { name: "SAP FI-CO · Bloomberg Terminal", note: "Industry tools" },
+      { name: "Chartered Accountancy", note: "Foundations" },
+    ],
+  },
+];
+
 const projects = [
   {
     num: "01",
     tag: "Featured · Industry-Sponsored",
     title: "Detecting Fare Evasion on MBTA Commuter Rail",
     summary:
-      "Four-layer ML pipeline (HMM + composite anomaly score + K-means) on 2.9M activation–scan events. Surfaced 15,195 evaders the existing rule engine completely misses.",
+      "Four-layer ML pipeline (HMM + composite anomaly score + K-means) on 2.9M activation–scan events across 221K riders. Trained a 9-state Categorical HMM via BIC over 70 Baum-Welch fits; combined HMM posteriors with an inspector-presence proxy, gaming-suspicion score, and rule confirmation. Surfaced 15,195 evaders the existing rule engine completely misses (20.5% novelty rate) and segmented the suspicious population into 6 operationally distinct enforcement clusters.",
     metrics: [
+      { value: "2.9M+", label: "Events analyzed" },
       { value: "20.5%", label: "Novelty rate" },
       { value: "9-state", label: "HMM, BIC-selected" },
       { value: "K=6", label: "Operational clusters" },
     ],
-    stack: ["Python", "hmmlearn", "scikit-learn", "UMAP", "AWS S3"],
+    stack: ["Python", "hmmlearn", "scikit-learn", "K-Means", "UMAP", "AWS S3", "joblib"],
     sponsor: "Masabi × Gemsen",
     accent: "accent",
   },
@@ -34,13 +112,13 @@ const projects = [
     tag: "AI · AutoML · Credit Risk",
     title: "LoanDesk AI — Loan Decision Analyzer",
     summary:
-      "AI loan pre-qualification tool deployed on Google Vertex AI. Bulk CSV processing with SHAP-style explainability and bias auditing across income, geography, age.",
+      "AI-powered loan pre-qualification tool deployed on Google Vertex AI (AutoML Classification). Supports single applications and bulk CSV batch processing with explainable approval/rejection confidence scores. Integrated SHAP-style explainability and bias auditing across income, geography, and age groups — human-in-the-loop fairness review for credit decisions.",
     metrics: [
       { value: "0.936", label: "ROC AUC" },
+      { value: "0.931", label: "PR AUC" },
       { value: "0.885", label: "F1 Score" },
-      { value: "15+", label: "Applicant features" },
     ],
-    stack: ["Vertex AI", "Gemini 2.5", "Python", "SHAP"],
+    stack: ["Vertex AI", "Gemini 2.5 Flash", "Python", "SHAP", "REST APIs"],
     accent: "cobalt",
   },
   {
@@ -48,27 +126,27 @@ const projects = [
     tag: "Data Viz · D3.js",
     title: "U.S. Cargo-Theft Surprise Index",
     summary:
-      "Interactive web dashboard exploring 2024 cargo-theft surprise across all 50 states. Funnel, ranked-bar, scatter, and choropleth views. FBI NIBRS + Census data.",
+      "Interactive multi-page D3.js dashboard exploring 2024 cargo-theft surprise (rate vs. population) across all 50 U.S. states. Built funnel, ranked-bar, scatter, and choropleth views from FBI NIBRS + Census 2024 data. Reproducible Python pipeline ingests XLSX sources and produces both data files and report figures.",
     metrics: [
-      { value: "50", label: "States" },
+      { value: "50", label: "States covered" },
       { value: "4", label: "Visual modes" },
-      { value: "FBI NIBRS", label: "+ Census" },
+      { value: "FBI NIBRS", label: "+ Census 2024" },
     ],
-    stack: ["D3.js", "Python", "Pandas"],
+    stack: ["D3.js", "Python", "Pandas", "HTML/CSS/JS", "Git"],
     accent: "moss",
   },
   {
     num: "04",
-    tag: "Crypto · Regulation",
-    title: "Stablecoin Regulation & Architecture",
+    tag: "Crypto · Regulation · Blockchain",
+    title: "Stablecoin Regulation & Architecture Analysis",
     summary:
-      "Five-essay technical analysis on the CFTC tokenized-collateral decision, GENIUS Act, narrow-banking risks. Argued private permissioned blockchain best satisfies compliance.",
+      "Five-essay technical analysis covering the CFTC tokenized-collateral decision, the GENIUS Act, narrow-banking risks, and blockchain architecture for regulated stablecoins. Argued — with comparative tables — that a private permissioned blockchain best satisfies GENIUS-Act compliance and consumer protection. Ran in-class Hyperledger Fabric exercises on Docker.",
     metrics: [
       { value: "5", label: "Technical essays" },
       { value: "3", label: "Regulatory frameworks" },
-      { value: "Permissioned", label: "Architecture" },
+      { value: "Permissioned", label: "Architecture choice" },
     ],
-    stack: ["Hyperledger Fabric", "Docker", "Bloomberg"],
+    stack: ["Hyperledger Fabric", "Docker", "Bloomberg", "GENIUS Act", "MiCA"],
     accent: "accent-warm",
   },
   {
@@ -76,13 +154,13 @@ const projects = [
     tag: "Blockchain · Full-Stack",
     title: "Property Management dApp",
     summary:
-      "Full-stack decentralized real-estate dApp on Ethereum Sepolia. Role-based access control, multi-sig transfer approvals, Chainlink ETH/USD oracle. 8/8 contract tests passing.",
+      "Full-stack decentralized real-estate application deployed on Ethereum Sepolia. Role-based access control (Development Authority / Approvers / Buyers-Sellers), multi-signature transfer approvals, and a Chainlink ETH/USD oracle. Dockerized frontend, backend, and MongoDB; passed all 8 smart-contract function tests with Truffle + Mocha + Chai.",
     metrics: [
       { value: "8/8", label: "Tests passed" },
       { value: "Multi-sig", label: "Approvals" },
       { value: "Live", label: "On Sepolia" },
     ],
-    stack: ["Solidity", "Truffle", "Vue.js", "Chainlink"],
+    stack: ["Solidity", "Truffle", "OpenZeppelin", "Vue.js", "Express.js", "MongoDB", "Chainlink"],
     accent: "cobalt",
   },
   {
@@ -90,43 +168,119 @@ const projects = [
     tag: "Machine Learning",
     title: "Predicting Student Depression Risk",
     summary:
-      "Random-Forest model on 27K+ student records — best performer over Logistic Regression and XGBoost. FERPA/HIPAA-compliant tiered intervention framework.",
+      "Random-Forest predictive model on 27,000+ student records — best performer over Logistic Regression and XGBoost with stratified 70/30 split and 5-fold cross-validation. Delivered ethical, FERPA/HIPAA-compliant business recommendations and a tiered intervention framework for higher-education counselors.",
     metrics: [
       { value: "87%", label: "Accuracy" },
       { value: "0.87", label: "F1 Score" },
       { value: "0.92", label: "ROC AUC" },
     ],
-    stack: ["Python", "scikit-learn", "XGBoost"],
+    stack: ["Python", "scikit-learn", "XGBoost", "Random Forest", "FERPA/HIPAA"],
     accent: "moss",
   },
   {
     num: "07",
-    tag: "UX Research",
-    title: "Eye-Tracking & Mobile-Game Ad Study",
+    tag: "UX Research · Eye-Tracking",
+    title: "Argus Eye-Tracking & Mobile-Game Ad Study",
     summary:
-      "Between-subjects ad-placement study (n=20) and within-subjects chatbot usability study (n=31). Chatbot rated significantly easier (t(29) = −2.30, p = .03).",
+      "Authored the data-collection manual and analysis playbook for the Argus eye-tracking system — calibration, AOI definition, fixation/dwell computation, pupil-diameter cognitive-load measurement, blink detection. Designed a between-subjects ad-placement study (n=20) and co-led a within-subjects usability study (n=31) — chatbot rated significantly easier than search (t(29) = −2.30, p = .03).",
     metrics: [
-      { value: "p=.03", label: "Significant" },
-      { value: "n=51", label: "Total participants" },
-      { value: "Argus", label: "ETVision" },
+      { value: "n=20", label: "Ad study" },
+      { value: "n=31", label: "Chatbot study" },
+      { value: "p = .03", label: "Significant finding" },
     ],
-    stack: ["Argus", "Excel", "t-Tests"],
+    stack: ["Argus ETVision", "ETAnalysis", "Excel", "t-Tests"],
     accent: "accent",
   },
   {
     num: "08",
-    tag: "Quant Finance",
-    title: "Earnings & Stock Price Movement",
+    tag: "Quantitative Finance",
+    title: "Earnings & Stock Price Movement Analysis",
     summary:
-      "Cross-sector study on 5 sectors (NVDA, GE, JPM, SPG, PFE) over a 10-year window. PEAD effects in tech, asymmetric loss-aversion in industrials.",
+      "Cross-sector study of how earnings surprises correlate with 1-day, 5-day, and 20-day stock-price movements across 5 sectors (NVDA, GE, JPM, SPG, PFE) over a 10-year window. Performed market-adjusted OLS regression, volatility, trading-volume, and Bollinger-band analyses. Identified PEAD effects in tech and asymmetric loss-aversion patterns in industrials.",
     metrics: [
       { value: "5", label: "Sectors" },
       { value: "10yr", label: "Window" },
-      { value: "PEAD", label: "Effects found" },
+      { value: "PEAD", label: "Effects identified" },
     ],
-    stack: ["Python", "Yahoo Finance", "OLS"],
+    stack: ["Python", "Yahoo Finance API", "OLS", "Pandas"],
     accent: "cobalt",
   },
+  {
+    num: "09",
+    tag: "Data Science",
+    title: "Amazon Sales — Pricing & Behavior",
+    summary:
+      "Analyzed 10,000+ Amazon sales records to uncover pricing trends, customer behavior, and category-level engagement. Applied K-Means clustering, Random Forest classification, linear regression, Apriori association rules, and PCA dimensionality reduction. Built interactive Tableau dashboards covering category performance, discount strategy, and review trends.",
+    metrics: [
+      { value: "87%", label: "RF Accuracy" },
+      { value: "0.72", label: "R²" },
+      { value: "10K+", label: "Records" },
+    ],
+    stack: ["MySQL", "SQLite", "Python", "Tableau", "scikit-learn", "Apriori", "PCA"],
+    accent: "moss",
+  },
+  {
+    num: "10",
+    tag: "Business Intelligence",
+    title: "Myntra USA Market Expansion",
+    summary:
+      "BI analysis on Myntra's US-market entry strategy. Segmented Gen-Z and Millennial customers, modeled CCPA/COPPA compliance, and produced a Kotter-style change-management plan. Built two Tableau dashboards (Sales Management + Product Performance) and ran conjoint analysis identifying premium pricing, casual styles, and local brands as the highest-utility product attributes.",
+    metrics: [
+      { value: "2", label: "Dashboards" },
+      { value: "Gen-Z + Mill.", label: "Segments" },
+      { value: "Kotter", label: "Framework" },
+    ],
+    stack: ["Tableau", "Power BI", "Azure", "SQL", "Conjoint Analysis", "CCPA/COPPA"],
+    accent: "accent-warm",
+  },
+  {
+    num: "11",
+    tag: "Mixed-Methods Research",
+    title: "Student Class Participation Personas",
+    summary:
+      "Mixed-methods research on classroom engagement at WPI. Conducted 7 student + 3 professor in-depth interviews, transcribed via Otter.AI, applied open + axial coding in NVivo to develop participation personas. Synthesized findings into recommendations for in-person, synchronous-online, and asynchronous-online engagement. Delivered a final infographic and short documentary video.",
+    metrics: [
+      { value: "10", label: "Interviews" },
+      { value: "3", label: "Modalities" },
+      { value: "Documentary", label: "Final output" },
+    ],
+    stack: ["Qualtrics", "Otter.AI", "NVivo 12 Plus", "Excel"],
+    accent: "moss",
+  },
+];
+
+const nowItems = [
+  {
+    title: "Open to interview — full-time + internship roles",
+    body:
+      "Just finished my MS at WPI (GPA 3.81, May 2026). Looking at data science, ML engineering, FinTech product, blockchain, and quantitative research. Open to US-based and remote positions; happy to relocate.",
+    meta: "Available now · vsaikrishna017@gmail.com",
+  },
+  {
+    title: "Capstone handoff — Masabi × Gemsen",
+    body:
+      "All deliverables shipped: 38-page final report, 60-rider validation review sheet, poster, and stakeholder presentation. Artefacts are with the industry partner for live deployment review.",
+    meta: "WPI BUS 596 · Submitted May 1, 2026",
+  },
+  {
+    title: "Studying PU learning & weak supervision",
+    body:
+      "Building on the capstone — reading up on positive-unlabeled learning and Snorkel-style weak supervision so the next iteration of the fraud pipeline can move from unsupervised to semi-supervised once domain labels arrive.",
+    meta: "Self-directed · Ongoing",
+  },
+  {
+    title: "Maintaining two portfolios",
+    body:
+      "Running this Astro + Tailwind build alongside the original vanilla HTML/CSS portfolio. Writing case studies for each major project so the work is legible to non-technical hiring managers.",
+    meta: "Two stacks · Two design languages",
+  },
+];
+
+const certifications = [
+  { name: "SAP Finance & Controlling (FI-CO)", issuer: "Power User Course Certificate" },
+  { name: "Data Analytics & Visualization", issuer: "Accenture · Job Simulation" },
+  { name: "Microsoft Office Intermediate", issuer: "Word · Excel · PowerPoint" },
+  { name: "International Conference of CA Students", issuer: "ICAI, Hyderabad · Dec 2022" },
 ];
 
 const accentMap: Record<string, string> = {
@@ -135,15 +289,24 @@ const accentMap: Record<string, string> = {
   moss: "text-[color:var(--color-moss)]",
   "accent-warm": "text-[color:var(--color-accent-warm)]",
 };
+const accentBgMap: Record<string, string> = {
+  accent: "bg-[color:var(--color-accent)]",
+  cobalt: "bg-[color:var(--color-cobalt)]",
+  moss: "bg-[color:var(--color-moss)]",
+  "accent-warm": "bg-[color:var(--color-accent-warm)]",
+};
 ---
 
-<Base>
+<Base
+  title="Sai Krishna Vaddeboina — FinTech, ML & Blockchain · Open to Full-Time & Internship"
+  description="MS Financial Technology graduate from WPI (GPA 3.81). Industry-sponsored ML capstone with Masabi × Gemsen. Open to full-time and internship roles in data science, ML engineering, FinTech, and blockchain."
+>
   <!-- ============= NAV ============= -->
-  <header class="fixed top-0 left-0 right-0 z-50 px-6 pt-6">
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 pt-4 sm:pt-6">
     <nav class="mx-auto max-w-6xl flex items-center justify-between
                 rounded-full border border-[color:var(--color-line)]
                 bg-[color:var(--color-paper)]/80 backdrop-blur-xl
-                px-5 py-2.5 shadow-sm">
+                px-4 sm:px-5 py-2.5 shadow-sm">
       <a href="#top" class="flex items-center gap-2 font-semibold tracking-tight">
         <span class="grid place-items-center w-8 h-8 rounded-full bg-[color:var(--color-ink)] text-[color:var(--color-bone)] text-xs">
           SV
@@ -151,9 +314,12 @@ const accentMap: Record<string, string> = {
         <span class="hidden sm:inline">Sai Krishna</span>
       </a>
       <ul class="hidden md:flex items-center gap-1 text-sm">
+        <li><a href="#now" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Now</a></li>
+        <li><a href="#experience" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Experience</a></li>
         <li><a href="#work" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Work</a></li>
+        <li><a href="#skills" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Skills</a></li>
+        <li><a href="#education" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Education</a></li>
         <li><a href="#about" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">About</a></li>
-        <li><a href="#contact" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Contact</a></li>
       </ul>
       <a href="mailto:vsaikrishna017@gmail.com"
          class="inline-flex items-center gap-1.5 px-4 py-2 text-sm
@@ -168,13 +334,13 @@ const accentMap: Record<string, string> = {
   </header>
 
   <!-- ============= HERO BENTO ============= -->
-  <main id="top" class="px-6 pt-32 pb-12">
+  <main id="top" class="px-4 sm:px-6 pt-28 sm:pt-32 pb-12">
     <section class="mx-auto max-w-6xl">
 
       <div class="grid grid-cols-12 gap-4 md:gap-5 auto-rows-[minmax(120px,auto)]">
 
         <!-- IDENTITY -->
-        <div class="bento spotlight col-span-12 md:col-span-8 md:row-span-2 p-8 md:p-12 grain">
+        <div class="bento spotlight col-span-12 md:col-span-8 md:row-span-2 p-7 sm:p-9 md:p-12 grain">
           <div class="flex flex-col h-full">
             <div class="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full
                         bg-[color:var(--color-bone)] border border-[color:var(--color-line)]
@@ -183,10 +349,10 @@ const accentMap: Record<string, string> = {
                 <span class="absolute inline-flex h-full w-full rounded-full bg-[color:var(--color-moss)] opacity-75 animate-ping"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-[color:var(--color-moss)]"></span>
               </span>
-              Available now · Open to relocate
+              Open to full-time + internships · Available now
             </div>
 
-            <h1 class="font-serif mt-8 text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
+            <h1 class="font-serif mt-6 sm:mt-8 text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
               Sai Krishna<br />
               <em class="italic text-[color:var(--color-accent)]">Vaddeboina.</em>
             </h1>
@@ -196,7 +362,7 @@ const accentMap: Record<string, string> = {
               I build production-grade systems where machine learning, blockchain, and finance meet.
             </p>
 
-            <div class="mt-auto pt-10 flex flex-wrap items-center gap-3 text-sm font-mono text-[color:var(--color-ink-dim)]">
+            <div class="mt-auto pt-8 sm:pt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-mono text-[color:var(--color-ink-dim)]">
               <span>Worcester, MA</span>
               <span class="opacity-30">·</span>
               <a href="https://github.com/SaiKrishnaVaddeboina" target="_blank" rel="noopener" class="hover:text-[color:var(--color-ink)]">GitHub</a>
@@ -235,10 +401,10 @@ const accentMap: Record<string, string> = {
         </div>
 
         <!-- CTA -->
-        <div class="bento col-span-12 md:col-span-6 p-6 flex flex-wrap gap-3 items-center justify-between dots-bg">
+        <div class="bento col-span-12 md:col-span-6 p-6 flex flex-wrap gap-4 items-center justify-between dots-bg">
           <div>
-            <p class="text-sm text-[color:var(--color-ink-dim)]">Looking for full-time roles in</p>
-            <p class="font-serif text-2xl md:text-3xl">
+            <p class="text-sm text-[color:var(--color-ink-dim)]">Open to full-time + internships in</p>
+            <p class="font-serif text-xl md:text-2xl leading-snug">
               Data Science · ML · FinTech · Blockchain
             </p>
           </div>
@@ -258,7 +424,7 @@ const accentMap: Record<string, string> = {
     </section>
 
     <!-- ============= MARQUEE STRIP ============= -->
-    <section class="mt-16 -mx-6 overflow-hidden border-y border-[color:var(--color-line)]
+    <section class="mt-14 sm:mt-16 -mx-4 sm:-mx-6 overflow-hidden border-y border-[color:var(--color-line)]
                     bg-[color:var(--color-paper)] py-5">
       <div class="flex gap-3 animate-marquee whitespace-nowrap w-max">
         {[...skills, ...skills].map((skill) => (
@@ -271,12 +437,121 @@ const accentMap: Record<string, string> = {
       </div>
     </section>
 
-    <!-- ============= SELECTED WORK ============= -->
-    <section id="work" class="mx-auto max-w-6xl mt-32">
+    <!-- ============= NOW ============= -->
+    <section id="now" class="mx-auto max-w-6xl mt-24 sm:mt-32">
       <div class="reveal flex items-end justify-between flex-wrap gap-4 mb-10">
         <div>
           <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
-            ↳ Selected Work · 11+ projects
+            ↳ Now · May 2026
+          </p>
+          <h2 class="font-serif text-5xl md:text-6xl leading-tight">
+            Currently <em class="italic text-[color:var(--color-accent)]">interviewing</em>.
+          </h2>
+        </div>
+        <p class="text-[color:var(--color-ink-soft)] max-w-md">
+          What I'm doing this month — actively looking for roles, wrapping up handoff, learning what comes next.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {nowItems.map((item, i) => (
+          <article class={`bento reveal p-7 md:p-8 flex flex-col gap-3 ${i === 0 ? "md:col-span-2 dots-bg" : ""}`}>
+            <div class="flex items-start gap-3">
+              <span class={`mt-1 w-2 h-2 rounded-full flex-shrink-0 ${i === 0 ? "bg-[color:var(--color-moss)]" : "bg-[color:var(--color-ink-dim)]"}`}></span>
+              <h3 class={`font-serif leading-tight ${i === 0 ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"}`}>
+                {item.title}
+              </h3>
+            </div>
+            <p class="text-[color:var(--color-ink-soft)] leading-relaxed pl-5">
+              {item.body}
+            </p>
+            <p class="font-mono text-xs text-[color:var(--color-ink-dim)] pl-5 mt-1">
+              {item.meta}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============= EXPERIENCE ============= -->
+    <section id="experience" class="mx-auto max-w-6xl mt-24 sm:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+          ↳ Experience
+        </p>
+        <h2 class="font-serif text-5xl md:text-6xl leading-tight">
+          Industry-sponsored, <em class="italic text-[color:var(--color-accent)]">production data</em>.
+        </h2>
+      </div>
+
+      <article class="bento reveal grain p-7 sm:p-9 md:p-12">
+        <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+          <div>
+            <p class="font-mono text-xs text-[color:var(--color-accent)] uppercase tracking-wider mb-2">
+              Industry-Sponsored Capstone Researcher
+            </p>
+            <h3 class="font-serif text-3xl md:text-4xl leading-tight">
+              Masabi × Gemsen × WPI
+            </h3>
+          </div>
+          <div class="text-right">
+            <p class="font-mono text-xs text-[color:var(--color-ink-dim)] uppercase tracking-wider">Sept 2025 — May 2026</p>
+            <p class="font-mono text-xs text-[color:var(--color-ink-dim)] mt-1">Worcester, MA</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-8">
+          <div class="md:col-span-2 space-y-4 text-[color:var(--color-ink-soft)] leading-relaxed">
+            <p>
+              Engineered a four-layer machine-learning pipeline — rule engine + 9-state Hidden Markov Model + composite anomaly score + K-means clustering — to detect inspector-triggered fare evasion on the MBTA commuter-rail network.
+            </p>
+            <p>
+              Trained the HMM on <strong class="text-[color:var(--color-ink)]">2,904,144 activation–scan events across 221,382 unique riders</strong> spanning April 2017 – January 2026. Selected 9 latent states by Bayesian Information Criterion across 70 Baum-Welch fits (~11.4 hours of training).
+            </p>
+            <p>
+              Identified <strong class="text-[color:var(--color-ink)]">15,195 novel evaders</strong> missed entirely by the existing rule engine — 20.5% novelty rate, exceeding the project threshold negotiated with the industry sponsor at inception. Performed feature engineering on 86 features across 14 logical groups, including a vehicle/minute-level inspector-presence proxy whose reactivity-gap signal reaches its theoretical maximum (1.0) for the most evasive subpopulation.
+            </p>
+            <p>
+              Segmented the suspicious population into six operationally distinct enforcement clusters (silhouette 0.183, K-means K=6) and authored a 60-rider human-validation review sheet with event-level evidence delivered to the partner. Presented findings via a 38-page final report, poster, and stakeholder presentation; collaborated with a five-person cross-functional team.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="border-l-2 border-[color:var(--color-accent)] pl-4">
+              <p class="font-serif text-3xl text-[color:var(--color-accent)] leading-tight">2.9M+</p>
+              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-1">Activation–scan events</p>
+            </div>
+            <div class="border-l-2 border-[color:var(--color-accent)] pl-4">
+              <p class="font-serif text-3xl text-[color:var(--color-accent)] leading-tight">221K</p>
+              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-1">Unique riders profiled</p>
+            </div>
+            <div class="border-l-2 border-[color:var(--color-accent)] pl-4">
+              <p class="font-serif text-3xl text-[color:var(--color-accent)] leading-tight">20.5%</p>
+              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-1">Novelty rate vs. baseline</p>
+            </div>
+            <div class="border-l-2 border-[color:var(--color-accent)] pl-4">
+              <p class="font-serif text-3xl text-[color:var(--color-accent)] leading-tight">38 pp</p>
+              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-1">Final report</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mt-8 pt-6 border-t border-[color:var(--color-line)]">
+          {["Python", "hmmlearn", "scikit-learn", "K-Means", "UMAP", "AWS S3", "joblib", "Pandas", "NumPy", "Bayesian Information Criterion"].map((s) => (
+            <span class="text-xs font-mono text-[color:var(--color-ink-dim)] px-2.5 py-1 rounded-md bg-[color:var(--color-bone)]">
+              {s}
+            </span>
+          ))}
+        </div>
+      </article>
+    </section>
+
+    <!-- ============= SELECTED WORK ============= -->
+    <section id="work" class="mx-auto max-w-6xl mt-24 sm:mt-32">
+      <div class="reveal flex items-end justify-between flex-wrap gap-4 mb-10">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+            ↳ Selected Work · 11 projects
           </p>
           <h2 class="font-serif text-5xl md:text-6xl leading-tight">
             Real problems,<br />
@@ -284,14 +559,14 @@ const accentMap: Record<string, string> = {
           </h2>
         </div>
         <p class="text-[color:var(--color-ink-soft)] max-w-md">
-          Eight here, three more on request. Each one has data, methodology, and measurable outcomes — no toy datasets.
+          Eleven end-to-end builds across industry-sponsored ML research, AutoML, blockchain dApps, regulatory analysis, data visualization, and quantitative finance. Each one has data, methodology, and measurable outcomes.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         {projects.map((p, i) => (
           <article class={`bento reveal p-7 md:p-9 flex flex-col gap-5 ${i === 0 ? "md:col-span-2 grain" : ""}`}>
-            <div class="flex items-center justify-between font-mono text-xs gap-3">
+            <div class="flex items-center justify-between font-mono text-xs gap-3 flex-wrap">
               <span class={`${accentMap[p.accent]} font-medium`}>{p.num} · {p.tag}</span>
               {p.sponsor && (
                 <span class="px-2.5 py-1 rounded-full border border-[color:var(--color-line)] text-[color:var(--color-ink-dim)]">
@@ -300,7 +575,7 @@ const accentMap: Record<string, string> = {
               )}
             </div>
 
-            <h3 class={`font-serif leading-tight ${i === 0 ? "text-4xl md:text-5xl" : "text-2xl md:text-3xl"}`}>
+            <h3 class={`font-serif leading-tight ${i === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"}`}>
               {p.title}
             </h3>
 
@@ -309,7 +584,7 @@ const accentMap: Record<string, string> = {
             </p>
 
             <div class="mt-auto space-y-4">
-              <div class="grid grid-cols-3 gap-3 pt-2">
+              <div class={`grid gap-3 pt-2 ${i === 0 ? "grid-cols-2 md:grid-cols-4" : "grid-cols-3"}`}>
                 {p.metrics.map((m) => (
                   <div class="border-l-2 border-[color:var(--color-line)] pl-3">
                     <p class={`font-serif text-xl md:text-2xl ${accentMap[p.accent]} leading-tight`}>
@@ -322,10 +597,9 @@ const accentMap: Record<string, string> = {
                 ))}
               </div>
 
-              <div class="flex flex-wrap gap-1.5 pt-2 border-t border-[color:var(--color-line)]">
+              <div class="flex flex-wrap gap-1.5 pt-3 border-t border-[color:var(--color-line)]">
                 {p.stack.map((s) => (
-                  <span class="text-xs font-mono text-[color:var(--color-ink-dim)]
-                               px-2 py-1 rounded-md bg-[color:var(--color-bone)]">
+                  <span class="text-xs font-mono text-[color:var(--color-ink-dim)] px-2 py-1 rounded-md bg-[color:var(--color-bone)]">
                     {s}
                   </span>
                 ))}
@@ -336,11 +610,105 @@ const accentMap: Record<string, string> = {
       </div>
     </section>
 
-    <!-- ============= ABOUT ============= -->
-    <section id="about" class="mx-auto max-w-6xl mt-32">
+    <!-- ============= SKILLS DETAILED ============= -->
+    <section id="skills" class="mx-auto max-w-6xl mt-24 sm:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+          ↳ Technical Stack
+        </p>
+        <h2 class="font-serif text-5xl md:text-6xl leading-tight">
+          The <em class="italic text-[color:var(--color-accent)]">toolkit</em>.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {skillGroups.map((g) => (
+          <div class="bento reveal p-6 md:p-7 flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <span class={`w-10 h-10 rounded-xl ${accentBgMap[g.accent]} grid place-items-center text-white`}>
+                {g.icon === "code" && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>}
+                {g.icon === "brain" && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>}
+                {g.icon === "chart" && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>}
+                {g.icon === "blocks" && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>}
+                {g.icon === "cloud" && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>}
+                {g.icon === "vault" && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>}
+              </span>
+              <h3 class="font-serif text-xl leading-tight">{g.title}</h3>
+            </div>
+            <ul class="space-y-2.5">
+              {g.items.map((s) => (
+                <li class="border-b border-dashed border-[color:var(--color-line)] last:border-0 pb-2 last:pb-0">
+                  <p class="text-sm font-medium text-[color:var(--color-ink)]">{s.name}</p>
+                  <p class="text-xs text-[color:var(--color-ink-dim)] mt-0.5 font-mono">{s.note}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============= EDUCATION & CERTS ============= -->
+    <section id="education" class="mx-auto max-w-6xl mt-24 sm:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+          ↳ Education & Certifications
+        </p>
+        <h2 class="font-serif text-5xl md:text-6xl leading-tight">
+          The <em class="italic text-[color:var(--color-accent)]">path so far</em>.
+        </h2>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
 
-        <div class="bento reveal col-span-12 md:col-span-8 p-8 md:p-12">
+        <!-- WPI -->
+        <div class="bento reveal col-span-12 md:col-span-7 p-7 md:p-9">
+          <div class="flex items-start justify-between gap-3 flex-wrap mb-4">
+            <p class="font-mono text-xs text-[color:var(--color-accent)] uppercase tracking-wider">Aug 2024 — May 2026</p>
+            <span class="px-2.5 py-1 rounded-full bg-[color:var(--color-bone)] text-xs font-mono text-[color:var(--color-ink-dim)]">
+              GPA 3.81 / 4.0
+            </span>
+          </div>
+          <h3 class="font-serif text-2xl md:text-3xl leading-tight">Master of Science, Financial Technology</h3>
+          <p class="text-[color:var(--color-ink-soft)] mt-2 mb-5">Worcester Polytechnic Institute · School of Business</p>
+          <p class="text-sm text-[color:var(--color-ink-dim)] leading-relaxed">
+            <strong class="text-[color:var(--color-ink-soft)]">Coursework:</strong> AI &amp; Its Business Applications · Financial Analytics · Cryptocurrencies &amp; Financial Markets · Business Application of Blockchain Tech · Business Applications in Machine Learning · Business Intelligence · Data Management for Analytics · Data Visualization · Marketing Research · MS Capstone Project
+          </p>
+        </div>
+
+        <!-- B.Com -->
+        <div class="bento reveal col-span-12 md:col-span-5 p-7 md:p-9">
+          <div class="flex items-start justify-between gap-3 flex-wrap mb-4">
+            <p class="font-mono text-xs text-[color:var(--color-ink-dim)] uppercase tracking-wider">Dec 2020 — May 2024</p>
+            <span class="px-2.5 py-1 rounded-full bg-[color:var(--color-bone)] text-xs font-mono text-[color:var(--color-ink-dim)]">
+              CGPA 8.0 / 10
+            </span>
+          </div>
+          <h3 class="font-serif text-2xl md:text-3xl leading-tight">Bachelor of Commerce, Chartered Accountancy</h3>
+          <p class="text-[color:var(--color-ink-soft)] mt-2 mb-5">Noble Degree &amp; PG College · Hyderabad, India</p>
+          <p class="text-sm text-[color:var(--color-ink-dim)] leading-relaxed">
+            Foundations in financial reporting, audit, taxation, and corporate accounting.
+          </p>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {certifications.map((c) => (
+            <div class="bento reveal p-5 sm:p-6">
+              <p class="font-mono text-[10px] uppercase tracking-widest text-[color:var(--color-ink-dim)]">Certificate</p>
+              <p class="font-serif text-lg leading-tight mt-2">{c.name}</p>
+              <p class="text-xs text-[color:var(--color-ink-dim)] mt-2">{c.issuer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= ABOUT ============= -->
+    <section id="about" class="mx-auto max-w-6xl mt-24 sm:mt-32">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+
+        <div class="bento reveal col-span-12 md:col-span-8 p-7 sm:p-9 md:p-12">
           <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-4">
             ↳ About me
           </p>
@@ -370,27 +738,54 @@ const accentMap: Record<string, string> = {
               Most of my projects sit between data analytics, machine learning, and blockchain.
               I like problems with actual data behind them and a clear question to answer.
             </p>
+            <p>
+              I'm now looking for <strong class="text-[color:var(--color-ink)]">full-time roles or internships</strong>
+              in data science, ML engineering, FinTech, or blockchain. If any of that overlaps
+              with what you're hiring for, please reach out.
+            </p>
           </div>
         </div>
 
-        <div class="col-span-12 md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-5">
+        <div class="col-span-12 md:col-span-4 grid grid-cols-1 gap-5">
           <div class="bento reveal p-6">
-            <p class="text-xs font-mono uppercase tracking-wider text-[color:var(--color-ink-dim)]">Education</p>
-            <p class="font-serif text-2xl mt-3">M.S. FinTech</p>
-            <p class="text-sm text-[color:var(--color-ink-soft)] mt-1">WPI · 2024–2026</p>
-            <div class="mt-4 pt-4 border-t border-[color:var(--color-line)]">
-              <p class="font-serif text-2xl">B.Com (CA)</p>
-              <p class="text-sm text-[color:var(--color-ink-soft)] mt-1">Noble Degree College · 2020–2024</p>
-              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-2">CGPA 8.0/10</p>
-            </div>
+            <p class="text-xs font-mono uppercase tracking-wider text-[color:var(--color-ink-dim)]">Quick Facts</p>
+            <dl class="mt-4 space-y-3 text-sm">
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
+                <dt class="text-[color:var(--color-ink-dim)]">Location</dt>
+                <dd class="font-medium text-right">Worcester, MA</dd>
+              </div>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
+                <dt class="text-[color:var(--color-ink-dim)]">Email</dt>
+                <dd class="font-medium text-right">
+                  <a href="mailto:vsaikrishna017@gmail.com" class="hover:text-[color:var(--color-accent)] text-xs sm:text-sm break-all">vsaikrishna017@gmail.com</a>
+                </dd>
+              </div>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
+                <dt class="text-[color:var(--color-ink-dim)]">Degree</dt>
+                <dd class="font-medium text-right">MS FinTech · WPI</dd>
+              </div>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
+                <dt class="text-[color:var(--color-ink-dim)]">Graduated</dt>
+                <dd class="font-medium text-right">May 2026</dd>
+              </div>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
+                <dt class="text-[color:var(--color-ink-dim)]">GPA</dt>
+                <dd class="font-medium text-right">3.81 / 4.0</dd>
+              </div>
+              <div class="flex justify-between items-baseline gap-3">
+                <dt class="text-[color:var(--color-ink-dim)]">Languages</dt>
+                <dd class="font-medium text-right">English · Telugu · Hindi</dd>
+              </div>
+            </dl>
           </div>
 
           <div class="bento reveal p-6 bg-[color:var(--color-ink)] text-[color:var(--color-bone)]">
-            <p class="text-xs font-mono uppercase tracking-wider opacity-60">Languages</p>
+            <p class="text-xs font-mono uppercase tracking-wider opacity-60">Open to</p>
             <ul class="mt-3 space-y-1.5 font-serif text-xl">
-              <li>English</li>
-              <li>Telugu</li>
-              <li>Hindi</li>
+              <li>· Full-time roles</li>
+              <li>· Internships</li>
+              <li>· Contract / freelance</li>
+              <li>· US / remote / relocate</li>
             </ul>
           </div>
         </div>
@@ -399,24 +794,24 @@ const accentMap: Record<string, string> = {
     </section>
 
     <!-- ============= CONTACT ============= -->
-    <section id="contact" class="mx-auto max-w-6xl mt-32 mb-20">
-      <div class="bento reveal spotlight relative p-10 md:p-20 grain text-center">
+    <section id="contact" class="mx-auto max-w-6xl mt-24 sm:mt-32 mb-20">
+      <div class="bento reveal spotlight relative p-8 sm:p-12 md:p-20 grain text-center">
 
         <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-5">
           ↳ Let's talk
         </p>
 
-        <h2 class="font-serif text-5xl md:text-7xl leading-[0.95]">
+        <h2 class="font-serif text-4xl sm:text-5xl md:text-7xl leading-[0.95]">
           Hiring? Building?<br />
           <em class="italic text-[color:var(--color-accent)]">Or just curious.</em>
         </h2>
 
-        <p class="text-lg text-[color:var(--color-ink-soft)] mt-8 max-w-xl mx-auto">
-          I'm actively looking for full-time roles starting now.
+        <p class="text-base sm:text-lg text-[color:var(--color-ink-soft)] mt-6 sm:mt-8 max-w-xl mx-auto">
+          Actively looking for full-time and internship roles starting now.
           Data science, ML engineering, FinTech product, quantitative research, blockchain — all open.
         </p>
 
-        <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
           <a href="mailto:vsaikrishna017@gmail.com"
              class="inline-flex items-center gap-2 px-6 py-3 rounded-full
                     bg-[color:var(--color-ink)] text-[color:var(--color-bone)]
@@ -447,13 +842,24 @@ const accentMap: Record<string, string> = {
             </svg>
             GitHub
           </a>
+          <a href="/Sai_Krishna_Vaddeboina_Resume.pdf"
+             target="_blank"
+             class="inline-flex items-center gap-2 px-6 py-3 rounded-full
+                    border border-[color:var(--color-accent)] bg-[color:var(--color-paper)]
+                    text-[color:var(--color-accent)]
+                    hover:bg-[color:var(--color-accent)] hover:text-white transition">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            Résumé
+          </a>
         </div>
       </div>
     </section>
   </main>
 
   <!-- ============= FOOTER ============= -->
-  <footer class="mx-auto max-w-6xl px-6 pb-10 pt-6 border-t border-[color:var(--color-line)]
+  <footer class="mx-auto max-w-6xl px-4 sm:px-6 pb-10 pt-6 border-t border-[color:var(--color-line)]
                  mt-10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-[color:var(--color-ink-dim)]">
     <p>© 2026 Sai Krishna Vaddeboina — Built with Astro + Tailwind, deployed on Vercel.</p>
     <p>v2 · Bento Edition</p>
