@@ -6,19 +6,19 @@
   --font-serif: "Instrument Serif", "Times New Roman", serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* Brand palette — warm minimal with accent */
+  /* Brand palette — warm minimal with accent (WCAG-AA tuned) */
   --color-ink: oklch(0.18 0.01 250);
-  --color-ink-soft: oklch(0.32 0.01 250);
-  --color-ink-dim: oklch(0.54 0.01 250);
+  --color-ink-soft: oklch(0.30 0.01 250);
+  --color-ink-dim: oklch(0.42 0.01 250);  /* darkened from .54 for AA contrast */
   --color-bone: oklch(0.97 0.005 80);
   --color-paper: oklch(0.99 0.003 80);
-  --color-line: oklch(0.92 0.005 80);
+  --color-line: oklch(0.90 0.005 80);     /* slightly darker for stronger borders */
 
-  /* Accent colors — sophisticated, not generic */
-  --color-accent: oklch(0.55 0.22 28);
-  --color-accent-warm: oklch(0.72 0.13 65);
-  --color-cobalt: oklch(0.48 0.18 256);
-  --color-moss: oklch(0.48 0.10 150);
+  /* Accent colors — sophisticated, all readable on bone */
+  --color-accent: oklch(0.50 0.22 28);       /* burnt orange — darkened slightly */
+  --color-accent-warm: oklch(0.52 0.15 50);  /* deep amber — significantly darker for legibility */
+  --color-cobalt: oklch(0.45 0.18 256);      /* deep blue */
+  --color-moss: oklch(0.44 0.11 150);        /* moss green — slightly darker */
   --color-cream: oklch(0.93 0.05 75);
 
   /* Radii */
