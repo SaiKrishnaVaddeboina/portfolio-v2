@@ -17,15 +17,30 @@ const skills = [
 
 const skillGroups = [
   {
-    title: "Programming",
-    icon: "code",
+    title: "FinTech & Finance Domain",
+    icon: "vault",
     accent: "accent",
+    primary: true,
     items: [
-      { name: "Python", note: "Pandas · NumPy · scikit-learn · hmmlearn" },
-      { name: "SQL", note: "MySQL · SQLite" },
-      { name: "Solidity", note: "Smart contracts" },
-      { name: "JavaScript", note: "Vue · Express · Node" },
-      { name: "R", note: "Statistical analysis" },
+      { name: "Credit Risk · Fraud Detection", note: "ML applied to finance" },
+      { name: "Quantitative Research", note: "Equities · earnings · markets" },
+      { name: "GENIUS Act · MiCA · Basel III", note: "Stablecoin regulation" },
+      { name: "CCPA · COPPA · FERPA · HIPAA", note: "Compliance frameworks" },
+      { name: "SAP FI-CO · Bloomberg Terminal", note: "Industry tools" },
+      { name: "Chartered Accountancy", note: "Foundations · audit · taxation" },
+    ],
+  },
+  {
+    title: "Financial Analytics & BI",
+    icon: "chart",
+    accent: "moss",
+    items: [
+      { name: "Tableau", note: "Dashboards · KPIs" },
+      { name: "Power BI", note: "DAX · modeling" },
+      { name: "D3.js", note: "Interactive web viz" },
+      { name: "Excel", note: "Pivot · VBA · advanced" },
+      { name: "Conjoint Analysis", note: "Preference modeling" },
+      { name: "NVivo 12 Plus", note: "Qualitative coding" },
     ],
   },
   {
@@ -41,15 +56,15 @@ const skillGroups = [
     ],
   },
   {
-    title: "Data & Visualization",
-    icon: "chart",
-    accent: "moss",
+    title: "Programming",
+    icon: "code",
+    accent: "accent",
     items: [
-      { name: "Tableau", note: "Dashboards · KPIs" },
-      { name: "Power BI", note: "DAX · modeling" },
-      { name: "D3.js", note: "Interactive web viz" },
-      { name: "Excel", note: "Pivot · VBA" },
-      { name: "NVivo 12 Plus", note: "Qualitative coding" },
+      { name: "Python", note: "Pandas · NumPy · scikit-learn · hmmlearn" },
+      { name: "SQL", note: "MySQL · SQLite" },
+      { name: "Solidity", note: "Smart contracts" },
+      { name: "JavaScript", note: "Vue · Express · Node" },
+      { name: "R", note: "Statistical analysis" },
     ],
   },
   {
@@ -74,18 +89,6 @@ const skillGroups = [
       { name: "Microsoft Azure", note: "Cloud services" },
       { name: "Docker", note: "Containerization" },
       { name: "Git / GitHub", note: "Version control · CI/CD" },
-    ],
-  },
-  {
-    title: "FinTech Domain",
-    icon: "vault",
-    accent: "accent",
-    items: [
-      { name: "Credit Risk · Fraud Detection", note: "ML applied to finance" },
-      { name: "GENIUS Act · MiCA · Basel III", note: "Stablecoin regulation" },
-      { name: "CCPA · COPPA · FERPA · HIPAA", note: "Compliance frameworks" },
-      { name: "SAP FI-CO · Bloomberg Terminal", note: "Industry tools" },
-      { name: "Chartered Accountancy", note: "Foundations" },
     ],
   },
 ];
@@ -253,7 +256,7 @@ const nowItems = [
   {
     title: "Open to interview — full-time + internship roles",
     body:
-      "Just finished my MS at WPI (GPA 3.81, May 2026). Looking at data science, ML engineering, FinTech product, blockchain, and quantitative research. Open to US-based and remote positions; happy to relocate.",
+      "Just finished my MS at WPI (GPA 3.81, May 2026). Primary focus: FinTech product, finance & quantitative research, financial analytics. Open to adjacent roles in data science, ML engineering, and blockchain. US-based and remote positions; happy to relocate.",
     meta: "Available now · vsaikrishna017@gmail.com",
   },
   {
@@ -298,8 +301,8 @@ const accentBgMap: Record<string, string> = {
 ---
 
 <Base
-  title="Sai Krishna Vaddeboina — FinTech, ML & Blockchain · Open to Full-Time & Internship"
-  description="MS Financial Technology graduate from WPI (GPA 3.81). Industry-sponsored ML capstone with Masabi × Gemsen. Open to full-time and internship roles in data science, ML engineering, FinTech, and blockchain."
+  title="Sai Krishna Vaddeboina — FinTech & Finance · Open to Full-Time & Internship"
+  description="MS Financial Technology graduate from WPI (GPA 3.81). Background in commerce and chartered accountancy, applied to FinTech, quantitative research, and financial analytics. Industry-sponsored capstone with Masabi × Gemsen. Open to full-time and internship roles in FinTech, finance, and quant."
 >
   <!-- ============= NAV ============= -->
   <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 pt-4 sm:pt-6">
@@ -358,8 +361,9 @@ const accentBgMap: Record<string, string> = {
             </h1>
 
             <p class="mt-6 text-lg md:text-xl text-[color:var(--color-ink-soft)] max-w-xl leading-relaxed">
-              MS Financial Technology graduate from <strong class="text-[color:var(--color-ink)]">Worcester Polytechnic Institute</strong>.
-              I build production-grade systems where machine learning, blockchain, and finance meet.
+              <strong class="text-[color:var(--color-ink)]">FinTech &amp; finance</strong> professional with an
+              MS from <strong class="text-[color:var(--color-ink)]">Worcester Polytechnic Institute</strong> and a
+              commerce + chartered-accountancy background. I bring data, ML, and blockchain to financial problems.
             </p>
 
             <div class="mt-auto pt-8 sm:pt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-mono text-[color:var(--color-ink-dim)]">
@@ -393,11 +397,13 @@ const accentBgMap: Record<string, string> = {
           </p>
         </div>
 
-        <!-- CAPSTONE STAT -->
+        <!-- FOCUS / SPECIALIZATION -->
         <div class="bento col-span-6 md:col-span-3 p-6 flex flex-col justify-between
                     bg-[color:var(--color-ink)] text-[color:var(--color-bone)]">
-          <p class="text-xs font-mono opacity-60 uppercase tracking-wider">Fraud cases found</p>
-          <p class="font-serif text-5xl md:text-6xl leading-none">15,195</p>
+          <p class="text-xs font-mono opacity-60 uppercase tracking-wider">Focus</p>
+          <p class="font-serif text-2xl md:text-3xl leading-tight">
+            FinTech ·<br/>Finance ·<br/>Quant Research
+          </p>
         </div>
 
         <!-- CTA -->
@@ -405,7 +411,7 @@ const accentBgMap: Record<string, string> = {
           <div>
             <p class="text-sm text-[color:var(--color-ink-dim)]">Open to full-time + internships in</p>
             <p class="font-serif text-xl md:text-2xl leading-snug">
-              Data Science · ML · FinTech · Blockchain
+              FinTech · Finance · Quant · Data Science
             </p>
           </div>
           <a href="/Sai_Krishna_Vaddeboina_Resume.pdf"
@@ -718,30 +724,34 @@ const accentBgMap: Record<string, string> = {
 
           <div class="space-y-5 text-lg leading-relaxed text-[color:var(--color-ink-soft)] max-w-2xl">
             <p>
-              I'm from Hyderabad, India. I did my Bachelor's in Commerce with a focus on
-              chartered accountancy — three years of audit, taxation, and the kind of financial
-              fluency that comes from working with real ledgers.
+              I'm a <strong class="text-[color:var(--color-ink)]">finance person who learned to code</strong>.
+              My roots are in commerce and chartered accountancy — three years in Hyderabad studying audit,
+              taxation, and corporate accounting. That foundation matters: I read a balance sheet before
+              I read a Pandas DataFrame.
             </p>
             <p>
-              After college I wanted to pair that finance background with technology, so I came to
-              <strong class="text-[color:var(--color-ink)]">Worcester Polytechnic Institute</strong>
-              for an MS in Financial Technology, which I just finished (May 2026, GPA 3.81).
+              I came to <strong class="text-[color:var(--color-ink)]">Worcester Polytechnic Institute</strong>
+              for an MS in Financial Technology (May 2026, GPA 3.81) to bring real technical depth to
+              that finance background — financial analytics, quantitative methods, machine learning
+              applied to credit, fraud, and markets.
             </p>
             <p>
-              My capstone was with industry partners
-              <strong class="text-[color:var(--color-ink)]">Masabi × Gemsen</strong>: a four-layer
-              ML pipeline for detecting fare evasion on MBTA commuter rail. It surfaced 15,000+
-              evaders the existing rule-based system completely missed. Real production data with
-              an industry sponsor — easily the most interesting part of my program.
+              My capstone with industry partners <strong class="text-[color:var(--color-ink)]">Masabi × Gemsen</strong>
+              was a four-layer ML pipeline on real MBTA fare data. We found 15,000+ evaders the existing
+              rule engine missed entirely. Production data, an industry sponsor, and a real financial
+              outcome — easily the most interesting part of my program.
             </p>
             <p>
-              Most of my projects sit between data analytics, machine learning, and blockchain.
-              I like problems with actual data behind them and a clear question to answer.
+              My work sits across <strong class="text-[color:var(--color-ink)]">FinTech, financial analytics,
+              quantitative research, credit risk, regulatory analysis</strong>, and
+              <strong class="text-[color:var(--color-ink)]">blockchain in finance</strong>. The ML, data,
+              and code are tools — the questions I care about are financial.
             </p>
             <p>
-              I'm now looking for <strong class="text-[color:var(--color-ink)]">full-time roles or internships</strong>
-              in data science, ML engineering, FinTech, or blockchain. If any of that overlaps
-              with what you're hiring for, please reach out.
+              I'm now looking for <strong class="text-[color:var(--color-ink)]">full-time roles or
+              internships</strong> at FinTech firms, banks, asset managers, hedge funds, regulators,
+              or anywhere finance meets data. If that overlaps with what you're hiring for, please
+              reach out.
             </p>
           </div>
         </div>
@@ -780,13 +790,16 @@ const accentBgMap: Record<string, string> = {
           </div>
 
           <div class="bento reveal p-6 bg-[color:var(--color-ink)] text-[color:var(--color-bone)]">
-            <p class="text-xs font-mono uppercase tracking-wider opacity-60">Open to</p>
-            <ul class="mt-3 space-y-1.5 font-serif text-xl">
-              <li>· Full-time roles</li>
-              <li>· Internships</li>
-              <li>· Contract / freelance</li>
-              <li>· US / remote / relocate</li>
+            <p class="text-xs font-mono uppercase tracking-wider opacity-60">Target roles</p>
+            <ul class="mt-3 space-y-1.5 font-serif text-lg leading-snug">
+              <li>· FinTech product / engineering</li>
+              <li>· Financial / quant analyst</li>
+              <li>· Risk &amp; credit analytics</li>
+              <li>· Data science · ML</li>
+              <li>· Blockchain in finance</li>
             </ul>
+            <p class="text-xs font-mono uppercase tracking-wider opacity-60 mt-5 pt-4 border-t border-white/15">Available for</p>
+            <p class="mt-2 text-sm">Full-time · Internships · Contract · US / remote / relocate</p>
           </div>
         </div>
 
@@ -808,7 +821,8 @@ const accentBgMap: Record<string, string> = {
 
         <p class="text-base sm:text-lg text-[color:var(--color-ink-soft)] mt-6 sm:mt-8 max-w-xl mx-auto">
           Actively looking for full-time and internship roles starting now.
-          Data science, ML engineering, FinTech product, quantitative research, blockchain — all open.
+          Primary focus is <strong class="text-[color:var(--color-ink)]">FinTech, finance, and quantitative
+          research</strong> — but data science, ML engineering, and blockchain are all on the table too.
         </p>
 
         <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
