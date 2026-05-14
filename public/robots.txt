@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saikrishnavaddeboina.vercel.app/sitemap.xml

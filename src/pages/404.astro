@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="404 — Page not found · Sai Krishna Vaddeboina"
+  description="The page you're looking for doesn't exist. Head back to the portfolio."
+>
+  <main class="min-h-screen flex items-center justify-center px-6 py-32">
+    <div class="bento spotlight grain max-w-3xl w-full p-10 sm:p-16 md:p-20 text-center">
+
+      <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-5">
+        ↳ 404
+      </p>
+
+      <h1 class="font-serif text-6xl sm:text-7xl md:text-8xl leading-[0.95] tracking-tight">
+        Page not<br/>
+        <em class="italic text-accent">found.</em>
+      </h1>
+
+      <p class="text-lg text-ink-soft mt-8 max-w-xl mx-auto leading-relaxed">
+        The page you're looking for doesn't exist, was moved, or never made it past the staging environment. Let's get you back to something real.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a href="/"
+           class="inline-flex items-center gap-2 px-6 py-3 rounded-full
+                  bg-ink text-bone hover:opacity-90 transition shadow-lg">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Back to portfolio
+        </a>
+        <a href="/#work"
+           class="inline-flex items-center gap-2 px-6 py-3 rounded-full
+                  border border-line bg-paper hover:border-ink transition">
+          See selected work
+        </a>
+        <a href="mailto:vsaikrishna017@gmail.com"
+           class="inline-flex items-center gap-2 px-6 py-3 rounded-full
+                  border border-accent text-accent
+                  hover:bg-accent hover:text-white transition">
+          Email me
+        </a>
+      </div>
+    </div>
+  </main>
+</Base>
