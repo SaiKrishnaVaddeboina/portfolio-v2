@@ -1,0 +1,465 @@
+---
+import Base from "../layouts/Base.astro";
+
+const stats = [
+  { value: "2.9M+", label: "Activation–scan events analyzed" },
+  { value: "221K", label: "Unique riders profiled" },
+  { value: "15,195", label: "Evaders surfaced (rules missed)" },
+  { value: "20.5%", label: "Novelty rate vs. baseline" },
+  { value: "9-state", label: "HMM, BIC-selected from 70 fits" },
+  { value: "K=6", label: "Operational enforcement clusters" },
+];
+
+const pipeline = [
+  {
+    num: "01",
+    title: "Pattern Rule Engine (Baseline)",
+    body: "Existing rule engine retained as descriptive baseline, flagging 58,752 riders (26.5%). Rule flags carry 20% weight in the final composite score — hybrid by design, not replacement.",
+  },
+  {
+    num: "02",
+    title: "9-State Hidden Markov Model",
+    body: "Categorical HMM trained over 7-symbol behavioral vocabulary. State count selected by Bayesian Information Criterion across 70 Baum-Welch fits over {2,3,4,5,7,9,11} states. Output: smooth posterior dominance scores per rider.",
+  },
+  {
+    num: "03",
+    title: "Composite Anomaly Score",
+    body: "Linear combination of four normalized signals: inspector reactivity (30%), HMM posterior (25%), gaming suspicion (25%), rule confirmation (20%). Continuous 0–1 risk score replaces binary flags.",
+  },
+  {
+    num: "04",
+    title: "K-Means Operational Clustering",
+    body: "K=6 selected via silhouette analysis (peak 0.183). Segments the 61,869 anomaly-selected riders into operationally distinct enforcement archetypes — each mapped to a specific intervention.",
+  },
+];
+
+const archetypes = [
+  { state: "S1", label: "Habitual Evader", symbol: "ACTIVATE_FAST_HANDHELD (0.753)", selfTrans: "0.984", pop: "26.6%" },
+  { state: "S0", label: "Purchase-Triggered", symbol: "PURCHASE_THEN_ACTIVATE_FAST (0.367)", selfTrans: "0.971", pop: "11.6%" },
+  { state: "S3", label: "Moderate / Alternator", symbol: "ACTIVATE_FAST_HANDHELD (0.463)", selfTrans: "0.973", pop: "23.0%" },
+];
+
+const segments = [
+  { value: "40,151", pct: "18.1%", label: "Both HMM + Rules flagged", highlight: false },
+  { value: "15,195", pct: "6.9% · NOVEL", label: "HMM-only — Pattern misses entirely", highlight: true },
+  { value: "18,601", pct: "8.4%", label: "Rules only (HMM doesn't flag)", highlight: false },
+  { value: "147,435", pct: "66.6%", label: "Clean — neither system flags", highlight: false },
+];
+
+const clusters = [
+  { id: "C2", n: "10,122", action: "Immediate Action", rationale: "100% Pattern-flagged · 58 fast events/rider · 162-day span" },
+  { id: "C3", n: "22,199", action: "Prioritise Review", rationale: "97.6% Rule A · highest suspicion (0.942) · largest cluster" },
+  { id: "C0", n: "7,136", action: "Peak-Hour Enforcement", rationale: "58.3% peak-hour activity · concentrated in rush trains" },
+  { id: "C1", n: "12,606", action: "Masabi Human Review", rationale: "83.9% novel · primary validation target" },
+  { id: "C4", n: "8,644", action: "False-Positive Investigation", rationale: "92.2% rule-flagged but suspicion only 0.249" },
+  { id: "C5", n: "1,162", action: "Monitor", rationale: "Inspector-reactive activators · gaming score 1.639 (10× any other cluster)" },
+];
+
+const features = [
+  {
+    title: "Behavioral Vocabulary",
+    body: "Discretized continuous activation-scan timing into 7 mutually exclusive symbols, including PURCHASE_THEN_ACTIVATE_FAST and GAMING_THRESHOLD — symbols Pattern's rule engine has no concept of.",
+  },
+  {
+    title: "Inspector Presence Proxy",
+    body: "Inferred at vehicle × 1-minute granularity by aggregating handheld-scan density. Top 5% of buckets flagged as high-presence; per-rider inspector_reactivity_gap hits its theoretical max of 1.0 in the top 20 most reactive riders.",
+  },
+  {
+    title: "Gaming Suspicion Score",
+    body: "Combines three timing hot-zone ratios (13–15s, 16–18s, 25–30s) with double weight on the 16–18s band — the most operationally costly 'just above Rule A' zone.",
+  },
+  {
+    title: "Weather Enrichment",
+    body: "Hourly Open-Meteo data joined for July–December 2025 to test whether evasion rate covaries with weather. Treated as cluster-profiling context, not a primary score signal.",
+  },
+];
+
+const adjustments = [
+  { title: "joblib parallelization", body: "Baum-Welch fits across 8 cores via the loky backend. The standard multiprocessing.spawn backend hangs on the Windows training environment." },
+  { title: "FIFO observation cap", body: "Limited to 30 events per rider, reducing 1.9M observations to 1.1M while preserving the most recent rider behavior and avoiding numerical underflow on long sequences." },
+  { title: "Stratified 50/50 sampling", body: "65,376 training riders balanced between rule-flagged and unflagged populations, with a 5-event minimum threshold for inclusion." },
+  { title: "Posterior dominance over Viterbi", body: "Replaced the bimodal Viterbi-based scoring with smooth predict_proba() output, giving a continuous distribution that's actually operationally usable." },
+];
+
+const futureWork = [
+  { title: "Positive-Unlabeled (PU) learning", body: "Using rule flags as conservative positive seeds." },
+  { title: "Snorkel-style weak supervision", body: "Five labeling functions to scale training data beyond the human-validated subset." },
+  { title: "New Pattern rule", body: "For inspector-reactive activators — closes one structural blind spot without requiring full pipeline deployment." },
+  { title: "Cross-agency generalization", body: "Tested on other Masabi customer agencies on the Justride platform." },
+];
+---
+
+<Base
+  title="MBTA Fare Evasion Detection — Sai Krishna Vaddeboina"
+  description="Industry-sponsored capstone: 4-layer ML pipeline using Hidden Markov Models on 2.9M MBTA events to detect fare evasion. Sponsored by Masabi × Gemsen."
+>
+  <!-- ============= NAV ============= -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 pt-4 sm:pt-6">
+    <nav class="mx-auto max-w-6xl flex items-center justify-between
+                rounded-full border border-line
+                bg-paper/80 backdrop-blur-xl
+                px-4 sm:px-5 py-2.5 shadow-sm">
+      <a href="/" class="flex items-center gap-2 font-semibold tracking-tight">
+        <span class="grid place-items-center w-8 h-8 rounded-full bg-ink text-bone text-xs">SV</span>
+        <span class="hidden sm:inline">Sai Krishna</span>
+      </a>
+      <a href="/" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm
+                rounded-full border border-line bg-paper hover:border-ink transition">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to portfolio
+      </a>
+    </nav>
+  </header>
+
+  <main class="px-4 sm:px-6 pt-28 sm:pt-32 pb-12">
+
+    <!-- ============= HEADER ============= -->
+    <section class="mx-auto max-w-6xl">
+      <a href="/#work" class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-6 inline-block hover:text-accent transition">
+        ← Selected Work
+      </a>
+
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="font-mono text-xs px-3 py-1.5 rounded-full bg-bone border border-line text-ink-soft">Capstone · Industry-Sponsored</span>
+        <span class="font-mono text-xs px-3 py-1.5 rounded-full bg-bone border border-line text-ink-soft">Machine Learning</span>
+        <span class="font-mono text-xs px-3 py-1.5 rounded-full bg-bone border border-line text-ink-soft">Behavioral Analytics</span>
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-7xl leading-[0.95] tracking-tight max-w-4xl">
+        Detecting Inspector-Triggered<br/>
+        Ticket Purchase Fraud<br/>
+        <em class="italic text-accent">on MBTA Commuter Rail.</em>
+      </h1>
+
+      <p class="font-serif text-lg md:text-xl text-ink-soft italic mt-6 max-w-2xl leading-relaxed">
+        A Hidden Markov Model and multi-signal anomaly scoring framework for behavioral fare-evasion detection.
+      </p>
+
+      <!-- Project credits bento -->
+      <div class="bento p-6 md:p-8 mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-ink-dim mb-1.5">Course</p>
+          <p class="text-sm font-medium">BUS 596 · MS FinTech Capstone</p>
+        </div>
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-ink-dim mb-1.5">Institution</p>
+          <p class="text-sm font-medium">WPI · School of Business</p>
+        </div>
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-ink-dim mb-1.5">Sponsors</p>
+          <p class="text-sm font-medium text-accent">Masabi × Gemsen</p>
+        </div>
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-ink-dim mb-1.5">Submitted</p>
+          <p class="text-sm font-medium">May 1, 2026</p>
+        </div>
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-ink-dim mb-1.5">Advisor</p>
+          <p class="text-sm font-medium">Professor Jim Ryan</p>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <p class="font-mono text-[10px] uppercase tracking-widest text-ink-dim mb-1.5">Team</p>
+          <p class="text-sm font-medium">5-person · MS FinTech '26</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= HEADLINE STATS ============= -->
+    <section class="mx-auto max-w-6xl mt-20">
+      <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3 reveal">↳ By the numbers</p>
+      <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-10 reveal">
+        Real data,<br/><em class="italic text-accent">measurable outcomes.</em>
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {stats.map((s) => (
+          <div class="bento reveal p-6 md:p-7">
+            <p class="font-serif text-3xl md:text-4xl text-accent leading-tight">{s.value}</p>
+            <p class="text-xs font-mono text-ink-dim mt-2 leading-snug">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============= THE PROBLEM ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="bento reveal p-7 md:p-12 grain">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ The problem</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight mb-6">
+          Mobile ticketing opened a fraud loophole<br/>
+          that <em class="italic text-accent">count-based rules can't see</em>.
+        </h2>
+
+        <div class="space-y-5 text-ink-soft leading-relaxed text-lg max-w-3xl">
+          <p>
+            When a rider activates their MBTA ticket only <em class="text-accent italic">after</em> spotting an inspector — compressing purchase, activation, and barcode scan into seconds — the inspector sees a valid ticket, the system logs a compliant rider, and the agency takes an invisible revenue hit.
+          </p>
+          <p>
+            Masabi's existing <strong class="text-ink">Pattern</strong> rule engine flags riders with three or more sub-15s activation-scan gaps in a 10-day window (Rule A) or sub-30s in 7 days (Rule B). The rules are interpretable and operationally deployed — but by design, they're blind to three classes of evasion:
+          </p>
+        </div>
+
+        <ul class="mt-6 space-y-3 max-w-3xl">
+          <li class="flex gap-3 items-start">
+            <span class="font-mono text-xs text-accent mt-1.5 flex-shrink-0">01</span>
+            <span class="text-ink-soft"><strong class="text-ink">Purchase compression</strong> — buying, activating, and scanning all within seconds upon inspector approach.</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="font-mono text-xs text-accent mt-1.5 flex-shrink-0">02</span>
+            <span class="text-ink-soft"><strong class="text-ink">Sequence alternation</strong> — fast-then-slow patterns that stay below the three-event threshold in any rolling window.</span>
+          </li>
+          <li class="flex gap-3 items-start">
+            <span class="font-mono text-xs text-accent mt-1.5 flex-shrink-0">03</span>
+            <span class="text-ink-soft"><strong class="text-ink">Inspector reactivity</strong> — riders who activate <em class="text-accent italic">only</em> when an inspector is physically present.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============= APPROACH (4-step pipeline) ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ The approach</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight">
+          A four-layer pipeline that <em class="italic text-accent">extends</em> — not replaces — the rule engine.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        {pipeline.map((step) => (
+          <div class="bento reveal p-7 md:p-8">
+            <p class="font-mono text-xs text-accent uppercase tracking-wider mb-3">{step.num}</p>
+            <h3 class="font-serif text-2xl leading-tight mb-3">{step.title}</h3>
+            <p class="text-ink-soft text-sm leading-relaxed">{step.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============= FEATURE ENGINEERING ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ Feature engineering</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight">
+          <em class="italic">86 features</em> across 14 logical groups.
+        </h2>
+        <p class="text-ink-soft mt-4 max-w-2xl leading-relaxed">
+          Built a rider-level feature table of dimension <strong class="text-ink">221,382 × 87</strong>, spanning timing, volume, personal-baseline deviation, line concentration, threshold-gaming ratios, inspector reactivity, time-of-day, geographic spread, sequence entropy, HMM dwell, and weather context.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        {features.map((f) => (
+          <div class="bento reveal p-7">
+            <h3 class="font-serif text-xl leading-tight mb-3">{f.title}</h3>
+            <p class="text-ink-soft text-sm leading-relaxed">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============= HMM ARCHETYPES ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ The HMM finding</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight">
+          Three habitual evasion archetypes —<br/>
+          <em class="italic text-accent">self-transitions above 0.97.</em>
+        </h2>
+        <p class="text-ink-soft mt-4 max-w-2xl leading-relaxed">
+          The fitted 9-state HMM identifies three latent states with self-transition probabilities exceeding 0.97 — direct empirical evidence that <strong class="text-ink">fare evasion is habitual, not situational</strong>. Once a rider enters an evasion state, they stay there.
+        </p>
+      </div>
+
+      <div class="bento reveal overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-line bg-bone">
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">State</th>
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">Archetype</th>
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">Dominant Symbol</th>
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">Self-Trans.</th>
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">Population</th>
+            </tr>
+          </thead>
+          <tbody>
+            {archetypes.map((a) => (
+              <tr class="border-b border-line last:border-0">
+                <td class="p-4 font-mono text-accent font-medium">{a.state}</td>
+                <td class="p-4 font-serif text-base">{a.label}</td>
+                <td class="p-4 text-xs font-mono text-ink-dim">{a.symbol}</td>
+                <td class="p-4 font-medium">{a.selfTrans}</td>
+                <td class="p-4 text-ink-soft">{a.pop}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============= THE RESULT ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ The result</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight">
+          <em class="italic text-accent">15,195 evaders</em> the rule engine completely misses.
+        </h2>
+        <p class="text-ink-soft mt-4 max-w-2xl leading-relaxed">
+          The pipeline's central success metric — agreed at project inception — was a <strong class="text-ink">20% novelty rate</strong> (riders we flag that Pattern's rules do not). We delivered <strong class="text-accent">20.5%</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {segments.map((s) => (
+          <div class={`bento reveal p-7 ${s.highlight ? "bg-charcoal text-bone" : ""}`}>
+            <p class={`font-serif text-4xl md:text-5xl leading-tight ${s.highlight ? "text-bone" : "text-accent"}`}>
+              {s.value}
+            </p>
+            <p class={`font-mono text-xs mt-2 ${s.highlight ? "text-accent" : "text-accent"} font-medium`}>
+              {s.pct}
+            </p>
+            <p class={`text-sm mt-3 leading-snug ${s.highlight ? "text-bone opacity-80" : "text-ink-soft"}`}>
+              {s.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============= OPERATIONAL CLUSTERS ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ Operational recommendations</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight">
+          Six clusters → <em class="italic text-accent">six distinct actions</em>.
+        </h2>
+        <p class="text-ink-soft mt-4 max-w-2xl leading-relaxed">
+          Continuous risk scores are operationally hard to act on. K-means at K=6 partitions the suspicious population into archetypes that map cleanly onto deployable interventions.
+        </p>
+      </div>
+
+      <div class="bento reveal overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-line bg-bone">
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">Cluster</th>
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">Riders</th>
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">Recommended Action</th>
+              <th class="text-left p-4 font-mono text-xs uppercase tracking-wider text-ink-dim">Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            {clusters.map((c) => (
+              <tr class="border-b border-line last:border-0">
+                <td class="p-4 font-mono text-accent font-medium">{c.id}</td>
+                <td class="p-4 font-medium">{c.n}</td>
+                <td class="p-4 font-serif">{c.action}</td>
+                <td class="p-4 text-ink-soft text-xs leading-relaxed">{c.rationale}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============= ENGINEERING DECISIONS ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ Engineering decisions that mattered</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight">
+          Four sponsor-mandated <em class="italic">adjustments</em>.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        {adjustments.map((a) => (
+          <div class="bento reveal p-7">
+            <h3 class="font-serif text-lg leading-tight mb-2">{a.title}</h3>
+            <p class="text-ink-soft text-sm leading-relaxed">{a.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============= FUTURE WORK ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="reveal mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ What's next</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight">
+          From unsupervised <em class="italic text-accent">→ supervised</em>.
+        </h2>
+        <p class="text-ink-soft mt-4 max-w-2xl leading-relaxed">
+          The unsupervised approach was deliberate — labels weren't available at inception. With the 60-rider Masabi review sheet returned with EVADER / NON-EVADER labels, the next phase pivots to:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        {futureWork.map((w, i) => (
+          <div class="bento reveal p-7">
+            <p class="font-mono text-xs text-accent uppercase tracking-wider mb-2">{String(i+1).padStart(2,'0')}</p>
+            <h3 class="font-serif text-lg leading-tight mb-2">{w.title}</h3>
+            <p class="text-ink-soft text-sm leading-relaxed">{w.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============= MY ROLE ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32">
+      <div class="bento reveal grain p-7 md:p-12">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">↳ My role</p>
+        <h2 class="font-serif text-3xl md:text-5xl leading-tight mb-6">
+          Five-person team. Industry partner. <em class="italic text-accent">Real data.</em>
+        </h2>
+
+        <div class="space-y-5 text-ink-soft leading-relaxed text-lg max-w-3xl">
+          <p>
+            This was a five-month, five-person collaboration with industry sponsorship from <strong class="text-ink">Masabi</strong> (the mobile-ticketing platform powering MBTA's Justride product) and <strong class="text-ink">Gemsen</strong>. Worked across the full pipeline: data-readiness audit, feature engineering, HMM training and tuning, anomaly score design, cluster interpretation, and the 38-page final report.
+          </p>
+          <p>
+            The work pushed me into territory I hadn't touched before — sequence modeling at scale, BIC-based model selection, building defensible composite scores in the absence of ground-truth labels — and grounded all of it in a real operational problem with a paying sponsor expecting a deliverable.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= CTA ============= -->
+    <section class="mx-auto max-w-6xl mt-24 md:mt-32 mb-20">
+      <div class="bento reveal spotlight p-10 md:p-20 grain text-center">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-5">↳ Let's talk</p>
+        <h2 class="font-serif text-4xl md:text-6xl leading-[0.95]">
+          Want to talk about <em class="italic text-accent">ML, FinTech, or fraud detection</em>?
+        </h2>
+
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a href="mailto:vsaikrishna017@gmail.com"
+             class="inline-flex items-center gap-2 px-6 py-3 rounded-full
+                    bg-ink text-bone hover:opacity-90 transition shadow-lg">
+            Email me
+          </a>
+          <a href="/#work"
+             class="inline-flex items-center gap-2 px-6 py-3 rounded-full
+                    border border-line bg-paper hover:border-ink transition">
+            See more projects
+          </a>
+          <a href="https://github.com/SaiKrishnaVaddeboina/mbta-fare-evasion-detection"
+             target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 px-6 py-3 rounded-full
+                    border border-accent text-accent
+                    hover:bg-accent hover:text-white transition">
+            View code on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mx-auto max-w-6xl px-4 sm:px-6 pb-10 pt-6 border-t border-line
+                 mt-10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-ink-dim">
+    <p>© 2026 Sai Krishna Vaddeboina — Built with Astro + Tailwind</p>
+    <a href="/" class="hover:text-ink">← Back to portfolio</a>
+  </footer>
+</Base>
