@@ -275,16 +275,16 @@ const certifications = [
 ];
 
 const accentMap: Record<string, string> = {
-  accent: "text-[color:var(--color-accent)]",
-  cobalt: "text-[color:var(--color-cobalt)]",
-  moss: "text-[color:var(--color-moss)]",
-  "accent-warm": "text-[color:var(--color-accent-warm)]",
+  accent: "text-accent",
+  cobalt: "text-cobalt",
+  moss: "text-moss",
+  "accent-warm": "text-accent-warm",
 };
 const accentBgMap: Record<string, string> = {
-  accent: "bg-[color:var(--color-accent)]",
-  cobalt: "bg-[color:var(--color-cobalt)]",
-  moss: "bg-[color:var(--color-moss)]",
-  "accent-warm": "bg-[color:var(--color-accent-warm)]",
+  accent: "bg-accent",
+  cobalt: "bg-cobalt",
+  moss: "bg-moss",
+  "accent-warm": "bg-accent-warm",
 };
 ---
 
@@ -295,26 +295,26 @@ const accentBgMap: Record<string, string> = {
   <!-- ============= NAV ============= -->
   <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 pt-4 sm:pt-6">
     <nav class="mx-auto max-w-6xl flex items-center justify-between
-                rounded-full border border-[color:var(--color-line)]
-                bg-[color:var(--color-paper)]/80 backdrop-blur-xl
+                rounded-full border border-line
+                bg-paper/80 backdrop-blur-xl
                 px-4 sm:px-5 py-2.5 shadow-sm">
       <a href="#top" class="flex items-center gap-2 font-semibold tracking-tight">
-        <span class="grid place-items-center w-8 h-8 rounded-full bg-[color:var(--color-ink)] text-[color:var(--color-bone)] text-xs">
+        <span class="grid place-items-center w-8 h-8 rounded-full bg-ink text-bone text-xs">
           SV
         </span>
         <span class="hidden sm:inline">Sai Krishna</span>
       </a>
       <ul class="hidden md:flex items-center gap-1 text-sm">
-        <li><a href="#now" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Now</a></li>
-        <li><a href="#experience" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Experience</a></li>
-        <li><a href="#work" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Work</a></li>
-        <li><a href="#skills" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Skills</a></li>
-        <li><a href="#education" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">Education</a></li>
-        <li><a href="#about" class="px-3 py-1.5 rounded-full hover:bg-[color:var(--color-bone)] transition">About</a></li>
+        <li><a href="#now" class="px-3 py-1.5 rounded-full hover:bg-bone transition">Now</a></li>
+        <li><a href="#experience" class="px-3 py-1.5 rounded-full hover:bg-bone transition">Experience</a></li>
+        <li><a href="#work" class="px-3 py-1.5 rounded-full hover:bg-bone transition">Work</a></li>
+        <li><a href="#skills" class="px-3 py-1.5 rounded-full hover:bg-bone transition">Skills</a></li>
+        <li><a href="#education" class="px-3 py-1.5 rounded-full hover:bg-bone transition">Education</a></li>
+        <li><a href="#about" class="px-3 py-1.5 rounded-full hover:bg-bone transition">About</a></li>
       </ul>
       <a href="mailto:vsaikrishna017@gmail.com"
          class="inline-flex items-center gap-1.5 px-4 py-2 text-sm
-                rounded-full bg-[color:var(--color-ink)] text-[color:var(--color-bone)]
+                rounded-full bg-ink text-bone
                 hover:opacity-90 transition">
         Get in touch
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -334,34 +334,34 @@ const accentBgMap: Record<string, string> = {
         <div class="bento spotlight col-span-12 md:col-span-8 md:row-span-2 p-7 sm:p-9 md:p-12 grain">
           <div class="flex flex-col h-full">
             <div class="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full
-                        bg-[color:var(--color-bone)] border border-[color:var(--color-line)]
+                        bg-bone border border-line
                         text-xs font-mono">
               <span class="relative flex w-2 h-2">
-                <span class="absolute inline-flex h-full w-full rounded-full bg-[color:var(--color-moss)] opacity-75 animate-ping"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-[color:var(--color-moss)]"></span>
+                <span class="absolute inline-flex h-full w-full rounded-full bg-moss opacity-75 animate-ping"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-moss"></span>
               </span>
               Open to full-time + internships · Available now
             </div>
 
             <h1 class="font-serif mt-6 sm:mt-8 text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
               Sai Krishna<br />
-              <em class="italic text-[color:var(--color-accent)]">Vaddeboina.</em>
+              <em class="italic text-accent">Vaddeboina.</em>
             </h1>
 
-            <p class="mt-6 text-lg md:text-xl text-[color:var(--color-ink-soft)] max-w-xl leading-relaxed">
-              <strong class="text-[color:var(--color-ink)]">FinTech &amp; finance</strong> professional with an
-              MS from <strong class="text-[color:var(--color-ink)]">Worcester Polytechnic Institute</strong> and a
+            <p class="mt-6 text-lg md:text-xl text-ink-soft max-w-xl leading-relaxed">
+              <strong class="text-ink">FinTech &amp; finance</strong> professional with an
+              MS from <strong class="text-ink">Worcester Polytechnic Institute</strong> and a
               commerce + chartered-accountancy background. I bring data, ML, and blockchain to financial problems.
             </p>
 
-            <div class="mt-auto pt-8 sm:pt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-mono text-[color:var(--color-ink-dim)]">
+            <div class="mt-auto pt-8 sm:pt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-mono text-ink-dim">
               <span>Worcester, MA</span>
               <span class="opacity-30">·</span>
-              <a href="https://github.com/SaiKrishnaVaddeboina" target="_blank" rel="noopener" class="hover:text-[color:var(--color-ink)]">GitHub</a>
+              <a href="https://github.com/SaiKrishnaVaddeboina" target="_blank" rel="noopener" class="hover:text-ink">GitHub</a>
               <span class="opacity-30">·</span>
-              <a href="https://www.linkedin.com/in/saikrishnavaddeboina/" target="_blank" rel="noopener" class="hover:text-[color:var(--color-ink)]">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/saikrishnavaddeboina/" target="_blank" rel="noopener" class="hover:text-ink">LinkedIn</a>
               <span class="opacity-30">·</span>
-              <a href="mailto:vsaikrishna017@gmail.com" class="hover:text-[color:var(--color-ink)]">Email</a>
+              <a href="mailto:vsaikrishna017@gmail.com" class="hover:text-ink">Email</a>
             </div>
           </div>
         </div>
@@ -379,34 +379,36 @@ const accentBgMap: Record<string, string> = {
 
         <!-- GPA -->
         <div class="bento col-span-6 md:col-span-3 p-6 flex flex-col justify-between">
-          <p class="text-xs font-mono text-[color:var(--color-ink-dim)] uppercase tracking-wider">GPA · WPI</p>
-          <p class="font-serif text-5xl md:text-6xl text-[color:var(--color-accent)] leading-none">
-            3.81<span class="text-[color:var(--color-ink-dim)] text-2xl">/4.0</span>
+          <p class="text-xs font-mono text-ink-dim uppercase tracking-wider">GPA · WPI</p>
+          <p class="font-serif text-5xl md:text-6xl text-accent leading-none">
+            3.81<span class="text-ink-dim text-2xl">/4.0</span>
           </p>
         </div>
 
-        <!-- FOCUS / SPECIALIZATION -->
-        <div class="bento col-span-6 md:col-span-3 p-6 flex flex-col justify-between
-                    bg-[color:var(--color-ink)] text-[color:var(--color-bone)]">
+        <!-- FOCUS / SPECIALIZATION (wider; now includes AI/ML + Blockchain + Quant) -->
+        <div class="bento col-span-12 md:col-span-5 p-6 flex flex-col justify-between
+                    bg-ink text-bone gap-4">
           <p class="text-xs font-mono opacity-70 uppercase tracking-wider">Focus areas</p>
           <p class="font-serif text-xl md:text-2xl leading-snug">
-            Finance ·<br/>FinTech ·<br/>Investment<br/>Banking
+            Finance · FinTech · Investment Banking ·<br />
+            <span class="opacity-95">AI / Machine Learning · Blockchain · Quant</span>
           </p>
         </div>
 
         <!-- CTA -->
-        <div class="bento col-span-12 md:col-span-6 p-6 flex flex-wrap gap-4 items-center justify-between dots-bg">
+        <div class="bento col-span-12 md:col-span-4 p-6 flex flex-col gap-3 justify-between dots-bg">
           <div>
-            <p class="text-sm text-[color:var(--color-ink-dim)]">Open to full-time + internships in</p>
-            <p class="font-serif text-xl md:text-2xl leading-snug">
-              Investment Banking · Asset Mgmt · FinTech · Quant
+            <p class="text-xs font-mono uppercase tracking-wider text-ink-dim">Open to</p>
+            <p class="font-serif text-xl md:text-2xl leading-snug mt-1">
+              Full-time<br/>
+              <span class="text-accent italic">+ Internships</span>
             </p>
           </div>
           <a href="/Sai_Krishna_Vaddeboina_Resume.pdf"
              target="_blank"
-             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
-                    bg-[color:var(--color-accent)] text-white text-sm font-medium
-                    hover:opacity-90 transition shadow-lg">
+             class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full
+                    bg-accent text-white text-sm font-medium
+                    hover:opacity-90 transition shadow-lg w-full">
             Download Résumé
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
@@ -418,13 +420,13 @@ const accentBgMap: Record<string, string> = {
     </section>
 
     <!-- ============= MARQUEE STRIP ============= -->
-    <section class="mt-14 sm:mt-16 -mx-4 sm:-mx-6 overflow-hidden border-y border-[color:var(--color-line)]
-                    bg-[color:var(--color-paper)] py-5">
+    <section class="mt-14 sm:mt-16 -mx-4 sm:-mx-6 overflow-hidden border-y border-line
+                    bg-paper py-5">
       <div class="flex gap-3 animate-marquee whitespace-nowrap w-max">
         {[...skills, ...skills].map((skill) => (
-          <span class="px-4 py-2 rounded-full border border-[color:var(--color-line)]
-                       text-sm text-[color:var(--color-ink-soft)]
-                       bg-[color:var(--color-bone)] flex-shrink-0">
+          <span class="px-4 py-2 rounded-full border border-line
+                       text-sm text-ink-soft
+                       bg-bone flex-shrink-0">
             {skill}
           </span>
         ))}
@@ -435,14 +437,14 @@ const accentBgMap: Record<string, string> = {
     <section id="now" class="mx-auto max-w-6xl mt-24 sm:mt-32">
       <div class="reveal flex items-end justify-between flex-wrap gap-4 mb-10">
         <div>
-          <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+          <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">
             ↳ Now · May 2026
           </p>
           <h2 class="font-serif text-5xl md:text-6xl leading-tight">
-            Currently <em class="italic text-[color:var(--color-accent)]">interviewing</em>.
+            Currently <em class="italic text-accent">interviewing</em>.
           </h2>
         </div>
-        <p class="text-[color:var(--color-ink-soft)] max-w-md">
+        <p class="text-ink-soft max-w-md">
           What I'm doing this month — actively looking for roles, wrapping up handoff, learning what comes next.
         </p>
       </div>
@@ -451,15 +453,15 @@ const accentBgMap: Record<string, string> = {
         {nowItems.map((item, i) => (
           <article class={`bento reveal p-7 md:p-8 flex flex-col gap-3 ${i === 0 ? "md:col-span-2 dots-bg" : ""}`}>
             <div class="flex items-start gap-3">
-              <span class={`mt-1 w-2 h-2 rounded-full flex-shrink-0 ${i === 0 ? "bg-[color:var(--color-moss)]" : "bg-[color:var(--color-ink-dim)]"}`}></span>
+              <span class={`mt-1 w-2 h-2 rounded-full flex-shrink-0 ${i === 0 ? "bg-moss" : "bg-ink-dim"}`}></span>
               <h3 class={`font-serif leading-tight ${i === 0 ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"}`}>
                 {item.title}
               </h3>
             </div>
-            <p class="text-[color:var(--color-ink-soft)] leading-relaxed pl-5">
+            <p class="text-ink-soft leading-relaxed pl-5">
               {item.body}
             </p>
-            <p class="font-mono text-xs text-[color:var(--color-ink-dim)] pl-5 mt-1">
+            <p class="font-mono text-xs text-ink-dim pl-5 mt-1">
               {item.meta}
             </p>
           </article>
@@ -470,18 +472,18 @@ const accentBgMap: Record<string, string> = {
     <!-- ============= EXPERIENCE ============= -->
     <section id="experience" class="mx-auto max-w-6xl mt-24 sm:mt-32">
       <div class="reveal mb-10">
-        <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">
           ↳ Experience
         </p>
         <h2 class="font-serif text-5xl md:text-6xl leading-tight">
-          Industry-sponsored, <em class="italic text-[color:var(--color-accent)]">production data</em>.
+          Industry-sponsored, <em class="italic text-accent">production data</em>.
         </h2>
       </div>
 
       <article class="bento reveal grain p-7 sm:p-9 md:p-12">
         <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
           <div>
-            <p class="font-mono text-xs text-[color:var(--color-accent)] uppercase tracking-wider mb-2">
+            <p class="font-mono text-xs text-accent uppercase tracking-wider mb-2">
               Industry-Sponsored Capstone Researcher
             </p>
             <h3 class="font-serif text-3xl md:text-4xl leading-tight">
@@ -489,21 +491,21 @@ const accentBgMap: Record<string, string> = {
             </h3>
           </div>
           <div class="text-right">
-            <p class="font-mono text-xs text-[color:var(--color-ink-dim)] uppercase tracking-wider">Sept 2025 — May 2026</p>
-            <p class="font-mono text-xs text-[color:var(--color-ink-dim)] mt-1">Worcester, MA</p>
+            <p class="font-mono text-xs text-ink-dim uppercase tracking-wider">Sept 2025 — May 2026</p>
+            <p class="font-mono text-xs text-ink-dim mt-1">Worcester, MA</p>
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-8">
-          <div class="md:col-span-2 space-y-4 text-[color:var(--color-ink-soft)] leading-relaxed">
+          <div class="md:col-span-2 space-y-4 text-ink-soft leading-relaxed">
             <p>
               Engineered a four-layer machine-learning pipeline — rule engine + 9-state Hidden Markov Model + composite anomaly score + K-means clustering — to detect inspector-triggered fare evasion on the MBTA commuter-rail network.
             </p>
             <p>
-              Trained the HMM on <strong class="text-[color:var(--color-ink)]">2,904,144 activation–scan events across 221,382 unique riders</strong> spanning April 2017 – January 2026. Selected 9 latent states by Bayesian Information Criterion across 70 Baum-Welch fits (~11.4 hours of training).
+              Trained the HMM on <strong class="text-ink">2,904,144 activation–scan events across 221,382 unique riders</strong> spanning April 2017 – January 2026. Selected 9 latent states by Bayesian Information Criterion across 70 Baum-Welch fits (~11.4 hours of training).
             </p>
             <p>
-              Identified <strong class="text-[color:var(--color-ink)]">15,195 novel evaders</strong> missed entirely by the existing rule engine — 20.5% novelty rate, exceeding the project threshold negotiated with the industry sponsor at inception. Performed feature engineering on 86 features across 14 logical groups, including a vehicle/minute-level inspector-presence proxy whose reactivity-gap signal reaches its theoretical maximum (1.0) for the most evasive subpopulation.
+              Identified <strong class="text-ink">15,195 novel evaders</strong> missed entirely by the existing rule engine — 20.5% novelty rate, exceeding the project threshold negotiated with the industry sponsor at inception. Performed feature engineering on 86 features across 14 logical groups, including a vehicle/minute-level inspector-presence proxy whose reactivity-gap signal reaches its theoretical maximum (1.0) for the most evasive subpopulation.
             </p>
             <p>
               Segmented the suspicious population into six operationally distinct enforcement clusters (silhouette 0.183, K-means K=6) and authored a 60-rider human-validation review sheet with event-level evidence delivered to the partner. Presented findings via a 38-page final report, poster, and stakeholder presentation; collaborated with a five-person cross-functional team.
@@ -511,28 +513,28 @@ const accentBgMap: Record<string, string> = {
           </div>
 
           <div class="space-y-4">
-            <div class="border-l-2 border-[color:var(--color-accent)] pl-4">
-              <p class="font-serif text-3xl text-[color:var(--color-accent)] leading-tight">2.9M+</p>
-              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-1">Activation–scan events</p>
+            <div class="border-l-2 border-accent pl-4">
+              <p class="font-serif text-3xl text-accent leading-tight">2.9M+</p>
+              <p class="text-xs font-mono text-ink-dim mt-1">Activation–scan events</p>
             </div>
-            <div class="border-l-2 border-[color:var(--color-accent)] pl-4">
-              <p class="font-serif text-3xl text-[color:var(--color-accent)] leading-tight">221K</p>
-              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-1">Unique riders profiled</p>
+            <div class="border-l-2 border-accent pl-4">
+              <p class="font-serif text-3xl text-accent leading-tight">221K</p>
+              <p class="text-xs font-mono text-ink-dim mt-1">Unique riders profiled</p>
             </div>
-            <div class="border-l-2 border-[color:var(--color-accent)] pl-4">
-              <p class="font-serif text-3xl text-[color:var(--color-accent)] leading-tight">20.5%</p>
-              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-1">Novelty rate vs. baseline</p>
+            <div class="border-l-2 border-accent pl-4">
+              <p class="font-serif text-3xl text-accent leading-tight">20.5%</p>
+              <p class="text-xs font-mono text-ink-dim mt-1">Novelty rate vs. baseline</p>
             </div>
-            <div class="border-l-2 border-[color:var(--color-accent)] pl-4">
-              <p class="font-serif text-3xl text-[color:var(--color-accent)] leading-tight">38 pp</p>
-              <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-1">Final report</p>
+            <div class="border-l-2 border-accent pl-4">
+              <p class="font-serif text-3xl text-accent leading-tight">38 pp</p>
+              <p class="text-xs font-mono text-ink-dim mt-1">Final report</p>
             </div>
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-2 mt-8 pt-6 border-t border-[color:var(--color-line)]">
+        <div class="flex flex-wrap gap-2 mt-8 pt-6 border-t border-line">
           {["Python", "hmmlearn", "scikit-learn", "K-Means", "UMAP", "AWS S3", "joblib", "Pandas", "NumPy", "Bayesian Information Criterion"].map((s) => (
-            <span class="text-xs font-mono text-[color:var(--color-ink-dim)] px-2.5 py-1 rounded-md bg-[color:var(--color-bone)]">
+            <span class="text-xs font-mono text-ink-dim px-2.5 py-1 rounded-md bg-bone">
               {s}
             </span>
           ))}
@@ -544,15 +546,15 @@ const accentBgMap: Record<string, string> = {
     <section id="work" class="mx-auto max-w-6xl mt-24 sm:mt-32">
       <div class="reveal flex items-end justify-between flex-wrap gap-4 mb-10">
         <div>
-          <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+          <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">
             ↳ Selected Work · 11 projects
           </p>
           <h2 class="font-serif text-5xl md:text-6xl leading-tight">
             Real problems,<br />
-            <em class="italic text-[color:var(--color-accent)]">real metrics.</em>
+            <em class="italic text-accent">real metrics.</em>
           </h2>
         </div>
-        <p class="text-[color:var(--color-ink-soft)] max-w-md">
+        <p class="text-ink-soft max-w-md">
           Eleven end-to-end builds across industry-sponsored ML research, AutoML, blockchain dApps, regulatory analysis, data visualization, and quantitative finance. Each one has data, methodology, and measurable outcomes.
         </p>
       </div>
@@ -563,7 +565,7 @@ const accentBgMap: Record<string, string> = {
             <div class="flex items-center justify-between font-mono text-xs gap-3 flex-wrap">
               <span class={`${accentMap[p.accent]} font-medium`}>{p.num} · {p.tag}</span>
               {p.sponsor && (
-                <span class="px-2.5 py-1 rounded-full border border-[color:var(--color-line)] text-[color:var(--color-ink-dim)]">
+                <span class="px-2.5 py-1 rounded-full border border-line text-ink-dim">
                   {p.sponsor}
                 </span>
               )}
@@ -573,27 +575,27 @@ const accentBgMap: Record<string, string> = {
               {p.title}
             </h3>
 
-            <p class="text-[color:var(--color-ink-soft)] leading-relaxed">
+            <p class="text-ink-soft leading-relaxed">
               {p.summary}
             </p>
 
             <div class="mt-auto space-y-4">
               <div class={`grid gap-3 pt-2 ${i === 0 ? "grid-cols-2 md:grid-cols-4" : "grid-cols-3"}`}>
                 {p.metrics.map((m) => (
-                  <div class="border-l-2 border-[color:var(--color-line)] pl-3">
+                  <div class="border-l-2 border-line pl-3">
                     <p class={`font-serif text-xl md:text-2xl ${accentMap[p.accent]} leading-tight`}>
                       {m.value}
                     </p>
-                    <p class="text-xs font-mono text-[color:var(--color-ink-dim)] mt-0.5">
+                    <p class="text-xs font-mono text-ink-dim mt-0.5">
                       {m.label}
                     </p>
                   </div>
                 ))}
               </div>
 
-              <div class="flex flex-wrap gap-1.5 pt-3 border-t border-[color:var(--color-line)]">
+              <div class="flex flex-wrap gap-1.5 pt-3 border-t border-line">
                 {p.stack.map((s) => (
-                  <span class="text-xs font-mono text-[color:var(--color-ink-dim)] px-2 py-1 rounded-md bg-[color:var(--color-bone)]">
+                  <span class="text-xs font-mono text-ink-dim px-2 py-1 rounded-md bg-bone">
                     {s}
                   </span>
                 ))}
@@ -607,11 +609,11 @@ const accentBgMap: Record<string, string> = {
     <!-- ============= SKILLS DETAILED ============= -->
     <section id="skills" class="mx-auto max-w-6xl mt-24 sm:mt-32">
       <div class="reveal mb-10">
-        <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">
           ↳ Technical Stack
         </p>
         <h2 class="font-serif text-5xl md:text-6xl leading-tight">
-          The <em class="italic text-[color:var(--color-accent)]">toolkit</em>.
+          The <em class="italic text-accent">toolkit</em>.
         </h2>
       </div>
 
@@ -631,9 +633,9 @@ const accentBgMap: Record<string, string> = {
             </div>
             <ul class="space-y-2.5">
               {g.items.map((s) => (
-                <li class="border-b border-dashed border-[color:var(--color-line)] last:border-0 pb-2 last:pb-0">
-                  <p class="text-sm font-medium text-[color:var(--color-ink)]">{s.name}</p>
-                  <p class="text-xs text-[color:var(--color-ink-dim)] mt-0.5 font-mono">{s.note}</p>
+                <li class="border-b border-dashed border-line last:border-0 pb-2 last:pb-0">
+                  <p class="text-sm font-medium text-ink">{s.name}</p>
+                  <p class="text-xs text-ink-dim mt-0.5 font-mono">{s.note}</p>
                 </li>
               ))}
             </ul>
@@ -645,11 +647,11 @@ const accentBgMap: Record<string, string> = {
     <!-- ============= EDUCATION & CERTS ============= -->
     <section id="education" class="mx-auto max-w-6xl mt-24 sm:mt-32">
       <div class="reveal mb-10">
-        <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-3">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-3">
           ↳ Education & Certifications
         </p>
         <h2 class="font-serif text-5xl md:text-6xl leading-tight">
-          The <em class="italic text-[color:var(--color-accent)]">path so far</em>.
+          The <em class="italic text-accent">path so far</em>.
         </h2>
       </div>
 
@@ -658,29 +660,29 @@ const accentBgMap: Record<string, string> = {
         <!-- WPI -->
         <div class="bento reveal col-span-12 md:col-span-7 p-7 md:p-9">
           <div class="flex items-start justify-between gap-3 flex-wrap mb-4">
-            <p class="font-mono text-xs text-[color:var(--color-accent)] uppercase tracking-wider">Aug 2024 — May 2026</p>
-            <span class="px-2.5 py-1 rounded-full bg-[color:var(--color-bone)] text-xs font-mono text-[color:var(--color-ink-dim)]">
+            <p class="font-mono text-xs text-accent uppercase tracking-wider">Aug 2024 — May 2026</p>
+            <span class="px-2.5 py-1 rounded-full bg-bone text-xs font-mono text-ink-dim">
               GPA 3.81 / 4.0
             </span>
           </div>
           <h3 class="font-serif text-2xl md:text-3xl leading-tight">Master of Science, Financial Technology</h3>
-          <p class="text-[color:var(--color-ink-soft)] mt-2 mb-5">Worcester Polytechnic Institute · School of Business</p>
-          <p class="text-sm text-[color:var(--color-ink-dim)] leading-relaxed">
-            <strong class="text-[color:var(--color-ink-soft)]">Coursework:</strong> AI &amp; Its Business Applications · Financial Analytics · Cryptocurrencies &amp; Financial Markets · Business Application of Blockchain Tech · Business Applications in Machine Learning · Business Intelligence · Data Management for Analytics · Data Visualization · Marketing Research · MS Capstone Project
+          <p class="text-ink-soft mt-2 mb-5">Worcester Polytechnic Institute · School of Business</p>
+          <p class="text-sm text-ink-dim leading-relaxed">
+            <strong class="text-ink-soft">Coursework:</strong> AI &amp; Its Business Applications · Financial Analytics · Cryptocurrencies &amp; Financial Markets · Business Application of Blockchain Tech · Business Applications in Machine Learning · Business Intelligence · Data Management for Analytics · Data Visualization · Marketing Research · MS Capstone Project
           </p>
         </div>
 
         <!-- B.Com -->
         <div class="bento reveal col-span-12 md:col-span-5 p-7 md:p-9">
           <div class="flex items-start justify-between gap-3 flex-wrap mb-4">
-            <p class="font-mono text-xs text-[color:var(--color-ink-dim)] uppercase tracking-wider">Dec 2020 — May 2024</p>
-            <span class="px-2.5 py-1 rounded-full bg-[color:var(--color-bone)] text-xs font-mono text-[color:var(--color-ink-dim)]">
+            <p class="font-mono text-xs text-ink-dim uppercase tracking-wider">Dec 2020 — May 2024</p>
+            <span class="px-2.5 py-1 rounded-full bg-bone text-xs font-mono text-ink-dim">
               CGPA 8.0 / 10
             </span>
           </div>
           <h3 class="font-serif text-2xl md:text-3xl leading-tight">Bachelor of Commerce, Chartered Accountancy</h3>
-          <p class="text-[color:var(--color-ink-soft)] mt-2 mb-5">Noble Degree &amp; PG College · Hyderabad, India</p>
-          <p class="text-sm text-[color:var(--color-ink-dim)] leading-relaxed">
+          <p class="text-ink-soft mt-2 mb-5">Noble Degree &amp; PG College · Hyderabad, India</p>
+          <p class="text-sm text-ink-dim leading-relaxed">
             Foundations in financial reporting, audit, taxation, and corporate accounting.
           </p>
         </div>
@@ -689,9 +691,9 @@ const accentBgMap: Record<string, string> = {
         <div class="col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {certifications.map((c) => (
             <div class="bento reveal p-5 sm:p-6">
-              <p class="font-mono text-[10px] uppercase tracking-widest text-[color:var(--color-ink-dim)]">Certificate</p>
+              <p class="font-mono text-[10px] uppercase tracking-widest text-ink-dim">Certificate</p>
               <p class="font-serif text-lg leading-tight mt-2">{c.name}</p>
-              <p class="text-xs text-[color:var(--color-ink-dim)] mt-2">{c.issuer}</p>
+              <p class="text-xs text-ink-dim mt-2">{c.issuer}</p>
             </div>
           ))}
         </div>
@@ -703,40 +705,40 @@ const accentBgMap: Record<string, string> = {
       <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
 
         <div class="bento reveal col-span-12 md:col-span-8 p-7 sm:p-9 md:p-12">
-          <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-4">
+          <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-4">
             ↳ About me
           </p>
           <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-8">
-            From <em class="italic">commerce</em> to <em class="italic text-[color:var(--color-accent)]">code</em>.
+            From <em class="italic">commerce</em> to <em class="italic text-accent">code</em>.
           </h2>
 
-          <div class="space-y-5 text-lg leading-relaxed text-[color:var(--color-ink-soft)] max-w-2xl">
+          <div class="space-y-5 text-lg leading-relaxed text-ink-soft max-w-2xl">
             <p>
-              I'm a <strong class="text-[color:var(--color-ink)]">finance person who learned to code</strong>.
+              I'm a <strong class="text-ink">finance person who learned to code</strong>.
               My roots are in commerce and chartered accountancy — three years in Hyderabad studying audit,
               taxation, and corporate accounting. That foundation matters: I read a balance sheet before
               I read a Pandas DataFrame.
             </p>
             <p>
-              I came to <strong class="text-[color:var(--color-ink)]">Worcester Polytechnic Institute</strong>
+              I came to <strong class="text-ink">Worcester Polytechnic Institute</strong>
               for an MS in Financial Technology (May 2026, GPA 3.81) to bring real technical depth to
               that finance background — financial analytics, quantitative methods, machine learning
               applied to credit, fraud, and markets.
             </p>
             <p>
-              My capstone with industry partners <strong class="text-[color:var(--color-ink)]">Masabi × Gemsen</strong>
+              My capstone with industry partners <strong class="text-ink">Masabi × Gemsen</strong>
               was a four-layer ML pipeline on real MBTA fare data. We found 15,000+ evaders the existing
               rule engine missed entirely. Production data, an industry sponsor, and a real financial
               outcome — easily the most interesting part of my program.
             </p>
             <p>
-              My work sits across <strong class="text-[color:var(--color-ink)]">FinTech, financial analytics,
+              My work sits across <strong class="text-ink">FinTech, financial analytics,
               quantitative research, credit risk, regulatory analysis</strong>, and
-              <strong class="text-[color:var(--color-ink)]">blockchain in finance</strong>. The ML, data,
+              <strong class="text-ink">blockchain in finance</strong>. The ML, data,
               and code are tools — the questions I care about are financial.
             </p>
             <p>
-              I'm now looking for <strong class="text-[color:var(--color-ink)]">full-time roles or
+              I'm now looking for <strong class="text-ink">full-time roles or
               internships</strong> at FinTech firms, banks, asset managers, hedge funds, regulators,
               or anywhere finance meets data. If that overlaps with what you're hiring for, please
               reach out.
@@ -746,38 +748,38 @@ const accentBgMap: Record<string, string> = {
 
         <div class="col-span-12 md:col-span-4 grid grid-cols-1 gap-5">
           <div class="bento reveal p-6">
-            <p class="text-xs font-mono uppercase tracking-wider text-[color:var(--color-ink-dim)]">Quick Facts</p>
+            <p class="text-xs font-mono uppercase tracking-wider text-ink-dim">Quick Facts</p>
             <dl class="mt-4 space-y-3 text-sm">
-              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
-                <dt class="text-[color:var(--color-ink-dim)]">Location</dt>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-line">
+                <dt class="text-ink-dim">Location</dt>
                 <dd class="font-medium text-right">Worcester, MA</dd>
               </div>
-              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
-                <dt class="text-[color:var(--color-ink-dim)]">Email</dt>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-line">
+                <dt class="text-ink-dim">Email</dt>
                 <dd class="font-medium text-right">
-                  <a href="mailto:vsaikrishna017@gmail.com" class="hover:text-[color:var(--color-accent)] text-xs sm:text-sm break-all">vsaikrishna017@gmail.com</a>
+                  <a href="mailto:vsaikrishna017@gmail.com" class="hover:text-accent text-xs sm:text-sm break-all">vsaikrishna017@gmail.com</a>
                 </dd>
               </div>
-              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
-                <dt class="text-[color:var(--color-ink-dim)]">Degree</dt>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-line">
+                <dt class="text-ink-dim">Degree</dt>
                 <dd class="font-medium text-right">MS FinTech · WPI</dd>
               </div>
-              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
-                <dt class="text-[color:var(--color-ink-dim)]">Graduated</dt>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-line">
+                <dt class="text-ink-dim">Graduated</dt>
                 <dd class="font-medium text-right">May 2026</dd>
               </div>
-              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-[color:var(--color-line)]">
-                <dt class="text-[color:var(--color-ink-dim)]">GPA</dt>
+              <div class="flex justify-between items-baseline gap-3 pb-3 border-b border-line">
+                <dt class="text-ink-dim">GPA</dt>
                 <dd class="font-medium text-right">3.81 / 4.0</dd>
               </div>
               <div class="flex justify-between items-baseline gap-3">
-                <dt class="text-[color:var(--color-ink-dim)]">Languages</dt>
+                <dt class="text-ink-dim">Languages</dt>
                 <dd class="font-medium text-right">English · Telugu · Hindi</dd>
               </div>
             </dl>
           </div>
 
-          <div class="bento reveal p-6 bg-[color:var(--color-ink)] text-[color:var(--color-bone)]">
+          <div class="bento reveal p-6 bg-ink text-bone">
             <p class="text-xs font-mono uppercase tracking-wider opacity-70">Target roles</p>
             <ul class="mt-3 space-y-1.5 font-serif text-base leading-snug">
               <li>· Investment Banking</li>
@@ -802,17 +804,17 @@ const accentBgMap: Record<string, string> = {
     <section id="contact" class="mx-auto max-w-6xl mt-24 sm:mt-32 mb-20">
       <div class="bento reveal spotlight relative p-8 sm:p-12 md:p-20 grain text-center">
 
-        <p class="font-mono text-xs uppercase tracking-widest text-[color:var(--color-ink-dim)] mb-5">
+        <p class="font-mono text-xs uppercase tracking-widest text-ink-dim mb-5">
           ↳ Let's talk
         </p>
 
         <h2 class="font-serif text-4xl sm:text-5xl md:text-7xl leading-[0.95]">
           Hiring? Building?<br />
-          <em class="italic text-[color:var(--color-accent)]">Or just curious.</em>
+          <em class="italic text-accent">Or just curious.</em>
         </h2>
 
-        <p class="text-base sm:text-lg text-[color:var(--color-ink-soft)] mt-6 sm:mt-8 max-w-2xl mx-auto">
-          Open to <strong class="text-[color:var(--color-ink)]">investment banking, asset management,
+        <p class="text-base sm:text-lg text-ink-soft mt-6 sm:mt-8 max-w-2xl mx-auto">
+          Open to <strong class="text-ink">investment banking, asset management,
           equity research, FinTech, financial analyst / FP&amp;A, quantitative research, risk &amp; credit
           analytics, audit / RegTech, data science in finance,</strong> and blockchain / crypto in finance —
           full-time or internship.
@@ -821,7 +823,7 @@ const accentBgMap: Record<string, string> = {
         <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
           <a href="mailto:vsaikrishna017@gmail.com"
              class="inline-flex items-center gap-2 px-6 py-3 rounded-full
-                    bg-[color:var(--color-ink)] text-[color:var(--color-bone)]
+                    bg-ink text-bone
                     hover:opacity-90 transition shadow-lg">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -832,8 +834,8 @@ const accentBgMap: Record<string, string> = {
           <a href="https://www.linkedin.com/in/saikrishnavaddeboina/"
              target="_blank" rel="noopener"
              class="inline-flex items-center gap-2 px-6 py-3 rounded-full
-                    border border-[color:var(--color-line)] bg-[color:var(--color-paper)]
-                    hover:border-[color:var(--color-ink)] transition">
+                    border border-line bg-paper
+                    hover:border-ink transition">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
             </svg>
@@ -842,8 +844,8 @@ const accentBgMap: Record<string, string> = {
           <a href="https://github.com/SaiKrishnaVaddeboina"
              target="_blank" rel="noopener"
              class="inline-flex items-center gap-2 px-6 py-3 rounded-full
-                    border border-[color:var(--color-line)] bg-[color:var(--color-paper)]
-                    hover:border-[color:var(--color-ink)] transition">
+                    border border-line bg-paper
+                    hover:border-ink transition">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.69.08-.69 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.24.72-1.53-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 015.79 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.21.68.8.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/>
             </svg>
@@ -852,9 +854,9 @@ const accentBgMap: Record<string, string> = {
           <a href="/Sai_Krishna_Vaddeboina_Resume.pdf"
              target="_blank"
              class="inline-flex items-center gap-2 px-6 py-3 rounded-full
-                    border border-[color:var(--color-accent)] bg-[color:var(--color-paper)]
-                    text-[color:var(--color-accent)]
-                    hover:bg-[color:var(--color-accent)] hover:text-white transition">
+                    border border-accent bg-paper
+                    text-accent
+                    hover:bg-accent hover:text-white transition">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
             </svg>
@@ -866,8 +868,8 @@ const accentBgMap: Record<string, string> = {
   </main>
 
   <!-- ============= FOOTER ============= -->
-  <footer class="mx-auto max-w-6xl px-4 sm:px-6 pb-10 pt-6 border-t border-[color:var(--color-line)]
-                 mt-10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-[color:var(--color-ink-dim)]">
+  <footer class="mx-auto max-w-6xl px-4 sm:px-6 pb-10 pt-6 border-t border-line
+                 mt-10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-ink-dim">
     <p>© 2026 Sai Krishna Vaddeboina — Built with Astro + Tailwind, deployed on Vercel.</p>
     <p>v2 · Bento Edition</p>
   </footer>
