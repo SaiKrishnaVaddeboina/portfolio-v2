@@ -13,6 +13,7 @@
   --color-bone: oklch(0.97 0.005 80);
   --color-paper: oklch(0.99 0.003 80);
   --color-line: oklch(0.90 0.005 80);     /* slightly darker for stronger borders */
+  --color-charcoal: oklch(0.28 0.015 50); /* warm charcoal — softer than ink for accent cards */
 
   /* Accent colors — sophisticated, all readable on bone */
   --color-accent: oklch(0.50 0.22 28);       /* burnt orange — darkened slightly */

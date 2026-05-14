@@ -109,6 +109,7 @@ const projects = [
     stack: ["Python", "hmmlearn", "scikit-learn", "K-Means", "UMAP", "AWS S3", "joblib"],
     sponsor: "Masabi × Gemsen",
     accent: "accent",
+    caseStudy: "https://saikrishnavaddeboina.github.io/mbta-fraud-detection.html",
   },
   {
     num: "02",
@@ -366,8 +367,7 @@ const accentBgMap: Record<string, string> = {
                class="w-full h-full object-cover absolute inset-0" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute bottom-5 left-5 right-5 text-white">
-            <p class="text-xs font-mono opacity-80">WPI School of Business · Class of 2026</p>
-            <p class="font-serif text-2xl mt-1 leading-tight">Industry-sponsored capstone, shipped.</p>
+            <p class="text-xs font-mono opacity-90">WPI · Class of 2026</p>
           </div>
         </div>
 
@@ -379,13 +379,13 @@ const accentBgMap: Record<string, string> = {
           </p>
         </div>
 
-        <!-- FOCUS / SPECIALIZATION (wider; now includes AI/ML + Blockchain + Quant) -->
-        <div class="bento col-span-12 md:col-span-5 p-6 flex flex-col justify-between
-                    bg-ink text-bone gap-4">
-          <p class="text-xs font-mono opacity-70 uppercase tracking-wider">Focus areas</p>
+        <!-- FOCUS / SPECIALIZATION (softer warm charcoal — less heavy than pure ink) -->
+        <div class="bento col-span-12 md:col-span-5 p-7 flex flex-col justify-between
+                    bg-charcoal text-bone gap-4">
+          <p class="text-xs font-mono opacity-65 uppercase tracking-wider">Focus areas</p>
           <p class="font-serif text-xl md:text-2xl leading-snug">
-            Finance · FinTech · Investment Banking ·<br />
-            <span class="opacity-95">AI / Machine Learning · Blockchain · Quant</span>
+            Finance · FinTech · <em class="italic text-accent">Investment Banking</em><br />
+            <span class="opacity-85 text-lg md:text-xl">AI / Machine Learning · Blockchain · Quant</span>
           </p>
         </div>
 
@@ -594,6 +594,17 @@ const accentBgMap: Record<string, string> = {
                   </span>
                 ))}
               </div>
+
+              {p.caseStudy && (
+                <a href={p.caseStudy} target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-2 self-start mt-2
+                          text-sm font-medium text-accent hover:gap-3 transition-all">
+                  Read full case study
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M13 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              )}
             </div>
           </article>
         ))}
