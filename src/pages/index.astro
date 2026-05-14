@@ -256,14 +256,8 @@ const nowItems = [
   {
     title: "Actively interviewing — full-time + internship roles",
     body:
-      "Just graduated from WPI (MS FinTech, GPA 3.81, May 2026). Open to roles across investment banking, asset management, equity research, FinTech, financial analytics, quantitative research, risk &amp; credit analytics, audit / RegTech, and data science in finance. US-based, remote, and relocation all welcome.",
+      "Just graduated from WPI (MS FinTech, GPA 3.81, May 2026). Open to roles across investment banking, asset management, equity research, FinTech, financial analytics, quantitative research, risk &amp; credit analytics, audit / RegTech, data science, and AI/ML or blockchain in finance. US-based, remote, and relocation all welcome.",
     meta: "Available now · vsaikrishna017@gmail.com",
-  },
-  {
-    title: "Capstone handoff complete — Masabi × Gemsen",
-    body:
-      "All deliverables shipped: 38-page final report, 60-rider validation review sheet, poster, and stakeholder presentation. Artefacts are with the industry partner for live deployment review.",
-    meta: "WPI BUS 596 · Submitted May 1, 2026",
   },
 ];
 
@@ -445,16 +439,16 @@ const accentBgMap: Record<string, string> = {
           </h2>
         </div>
         <p class="text-ink-soft max-w-md">
-          What I'm doing this month — actively looking for roles, wrapping up handoff, learning what comes next.
+          Where I'm focusing this month — actively interviewing across finance, FinTech, and quant roles.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 gap-5">
         {nowItems.map((item, i) => (
-          <article class={`bento reveal p-7 md:p-8 flex flex-col gap-3 ${i === 0 ? "md:col-span-2 dots-bg" : ""}`}>
+          <article class="bento reveal p-7 md:p-10 flex flex-col gap-3 dots-bg">
             <div class="flex items-start gap-3">
-              <span class={`mt-1 w-2 h-2 rounded-full flex-shrink-0 ${i === 0 ? "bg-moss" : "bg-ink-dim"}`}></span>
-              <h3 class={`font-serif leading-tight ${i === 0 ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"}`}>
+              <span class="mt-1 w-2 h-2 rounded-full flex-shrink-0 bg-moss"></span>
+              <h3 class="font-serif leading-tight text-3xl md:text-4xl">
                 {item.title}
               </h3>
             </div>
